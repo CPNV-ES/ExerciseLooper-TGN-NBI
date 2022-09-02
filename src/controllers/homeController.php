@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Controllers;
+use App\Services\Templating;
 
-class HomeController {
+class HomeController 
+{
     static function index() {
-       include('./src/views/home.php');
+        Templating::generate('./src/views/template.php', './src/views/home/index.php');
     }
 }

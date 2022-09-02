@@ -2,10 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Services\Templating;
+
 class ExerciseController
 {
     static function new()
     {
-        include('./src/views/newExercise.php');
+        Templating::generate('./src/views/template.php', './src/views/exercise/new.php');
     }
 }
