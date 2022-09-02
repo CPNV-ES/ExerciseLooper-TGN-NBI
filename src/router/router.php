@@ -37,19 +37,19 @@ class Router {
 
     public function run(){
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
-            throw new RouterException('REQUEST_METHOD does not exist');
+            include('./src/views/errors/404.html');
         }
         foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
             if($route->match($this->url)) {
                 return $route->call();
             }
         }
-        throw new RouterException('No matching routes');
+        include('./src/views/errors/404.html');
     }
 
     public function url($name, $params = []) {
         if(!isset($this->namedRoutes[$name])) {
-            throw new RouterException('No route matches this name');
+            include('./src/views/errors/404.html');
         }
         return $this->namedRoutes[$name]->getUrl($params);
     }

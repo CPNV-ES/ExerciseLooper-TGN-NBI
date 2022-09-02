@@ -1,16 +1,17 @@
 <?php
 namespace App;
 
-require('./src/router/Router.php');
+require('./src/router/router.php');
 use App\Router\Router as Router;
 
-require('./src/controllers/HomeController.php');
-use App\Controllers\HomeController as HomeController;
+require('./src/controllers/homeController.php');
+
+require('./src/controllers/exerciseController.php');
 
 $router = new Router($_SERVER['REQUEST_URI']);
 
-$router->get('/', "home#home");
+$router->get('/', "home#index");
 
-$router->get('/contact/:id', "home#homeView");
+$router->get('/exercises/new', "exercise#new");
 
 $router->run();
