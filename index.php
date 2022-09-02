@@ -1,12 +1,16 @@
 <?php
-namespace ExerciseLooper;
+namespace App;
 
-include('./src/services/Router.php');
-use ExerciseLooper\services\Router as Router;
+require('./src/router/Router.php');
+use App\Router\Router as Router;
 
-$router = new Router();
+require('./src/controllers/HomeController.php');
+use App\Controllers\HomeController as HomeController;
 
-$router->get("/", ['HomeController', 'home']);
-$router->get("/", ['HomeController', 'foo']);
+$router = new Router($_SERVER['REQUEST_URI']);
 
-$router->verify();
+$router->get('/', "home#home");
+
+$router->get('/contact/:id', "home#homeView");
+
+$router->run();

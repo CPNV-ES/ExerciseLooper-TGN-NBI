@@ -1,11 +1,12 @@
 <?php
-namespace ExerciseLooper\Controllers;
+
+namespace App\Controllers;
 
 class HomeController {
-    static function home() {
-        include('./src/views/home.php');
+    static function homeView($id) {
+        echo "$id";
     }
-    static function foo() {
-        include('./src/views/foo.php');
+    static function home() {
+        echo "sal";
     }
 }
