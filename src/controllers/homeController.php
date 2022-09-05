@@ -5,7 +5,7 @@ use App\Services\Templating;
 
 class HomeController 
 {
-    static function index() {
-        Templating::generate('./src/views/template.php', './src/views/home/index.php');
+    public static function index() {
+        Templating::render('homeTemplate.php', 'home/index.php');
     }
 }

@@ -6,8 +6,11 @@ use App\Services\Templating;
 
 class ExerciseController
 {
-    static function new()
+    public static function new()
     {
-        Templating::generate('./src/views/template.php', './src/views/exercise/new.php');
+        Templating::render('template.php', 'exercise/new.php',[
+            "headerColor" => "managing",
+            "headerTitle" => "New exercise",
+        ]);
     }
 }

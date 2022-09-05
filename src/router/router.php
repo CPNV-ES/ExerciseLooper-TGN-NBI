@@ -1,29 +1,34 @@
 <?php
 namespace App\Router;
 
-require('./src/router/route.php');
+require(SOURCE_DIR.'/router/route.php');
 use App\Router\Route as Route;
+use App\Services\Templating;
 
-
-class Router {
+class Router 
+{
 
     private $url;
     private $routes = [];
     private $namedRoutes = [];
 
-    public function __construct($url) {
+    public function __construct($url) 
+    {
         $this->url = $url;
     }
 
-    public function get($path, $callable, $name = null) {
+    public function get($path, $callable, $name = null) 
+    {
         return $this->add($path, $callable, $name, 'GET');
     }
 
-    public function post($path, $callable, $name = null) {
+    public function post($path, $callable, $name = null) 
+    {
         return $this->add($path, $callable, $name, 'POST');
     }
 
-    private function add($path, $callable, $name, $method) {
+    private function add($path, $callable, $name, $method) 
+    {
         $route = new Route($path, $callable);
         $this->routes[$method][] = $route;
         if(is_string($callable) && $name === null){
@@ -35,21 +40,23 @@ class Router {
         return $route;
     }
 
-    public function run(){
+    public function run()
+    {
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
-            include('./src/views/errors/404.html');
+            Templating::render('template.php', 'errors/404.html');
         }
         foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
             if($route->match($this->url)) {
                 return $route->call();
             }
         }
-        include('./src/views/errors/404.html');
+        Templating::render('template.php', 'errors/404.html');
     }
 
-    public function url($name, $params = []) {
+    public function url($name, $params = []) 
+    {
         if(!isset($this->namedRoutes[$name])) {
-            include('./src/views/errors/404.html');
+            Templating::render('template.php', 'errors/404.html');
         }
         return $this->namedRoutes[$name]->getUrl($params);
     }
