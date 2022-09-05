@@ -42,12 +42,11 @@ class Router
 
     public function run()
     {
-        if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
-            Templating::render('template.php', 'errors/404.html');
-        }
-        foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
-            if($route->match($this->url)) {
-                return $route->call();
+        if(isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
+            foreach($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+                if($route->match($this->url)) {
+                    return $route->call();
+                }
             }
         }
         Templating::render('template.php', 'errors/404.html');
