@@ -1,0 +1,33 @@
+<?php 
+/*
+    Project: ExerciseLooper - MAW1.1
+    Author: Thomas Grossmann
+    Date: 09.09.2022
+    Description: PDO Instanciation and model functions related to Exercises
+*/
+
+namespace App\Models;
+
+use App\Db\Database as Database;
+
+class ExercisesModel
+{
+    private $connection;
+
+    public function __construct()
+    {
+        $this->connection = new Database();
+    }
+
+    public function read()
+    {
+        $query = "SELECT * FROM exersices";
+        $statement = $this->connection->Database::prepare($query);
+        if ($statement->execute()) {
+            while ($rows = $statement->fetch()) {
+                $fetch[] = $rows;
+            }
+            return $fetch;
+        }
+    }
+}
