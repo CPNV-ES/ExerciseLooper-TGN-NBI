@@ -1,4 +1,9 @@
-
+<!--
+    Project: ExerciseLooper - Maw1.1
+    Author: Noah Barberini
+    Date: 02.09.2022
+    Description: Home view
+-->
 <div class="container dashboard">
     <section class="row">
         <div class="column">

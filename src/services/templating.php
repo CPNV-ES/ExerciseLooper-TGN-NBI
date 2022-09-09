@@ -1,4 +1,11 @@
 <?php
+/*
+    Project: ExerciseLooper - Maw1.1
+    Author: Noah Barberini
+    Date: 02.09.2022
+    Description: Class for use template
+*/
+
 namespace App\Services;
 class Templating 
 {

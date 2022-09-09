@@ -1,4 +1,10 @@
 <?php
+/*
+    Project: ExerciseLooper - Maw1.1
+    Author: Noah Barberini
+    Date: 02.09.2022
+    Description: Router of website
+*/
 namespace App\Router;
 
 require(SOURCE_DIR.'/router/route.php');
@@ -59,5 +65,4 @@ class Router
         }
         return $this->namedRoutes[$name]->getUrl($params);
     }
-
 }

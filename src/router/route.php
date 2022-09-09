@@ -1,4 +1,10 @@
 <?php
+/*
+    Project: ExerciseLooper - Maw1.1
+    Author: Noah Barberini
+    Date: 02.09.2022
+    Description: Class for create a new route
+*/
 namespace App\Router;
 
 class Route 
@@ -39,8 +45,8 @@ class Route
     public function getUrl($params)
     {
         $path = $this->path;
-        foreach($params as $k => $v){
-            $path = str_replace(":$k", $v, $path);
+        foreach($params as $key => $value){
+            $path = str_replace(":$key", $value, $path);
         }
         return $path;
     }

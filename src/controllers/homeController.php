@@ -1,5 +1,10 @@
 <?php
-
+/*
+    Project: ExerciseLooper - Maw1.1
+    Author: Noah Barberini
+    Date: 02.09.2022
+    Description: Home controller
+*/
 namespace App\Controllers;
 use App\Services\Templating;
 

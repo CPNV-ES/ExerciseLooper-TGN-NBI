@@ -1,3 +1,9 @@
+<!--
+    Project: ExerciseLooper - Maw1.1
+    Author: Noah Barberini
+    Date: 02.09.2022
+    Description: View New exercice
+-->
 <main class="container">
     <h1>New Exercise</h1>
     <form action="/exercises" accept-charset="UTF-8" method="post">
