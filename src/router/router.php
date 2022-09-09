@@ -9,7 +9,7 @@ namespace App\Router;
 
 require(SOURCE_DIR.'/router/route.php');
 use App\Router\Route as Route;
-use App\Services\Templating;
+use App\Renderer\Renderer;
 
 class Router 
 {
@@ -55,13 +55,13 @@ class Router
                 }
             }
         }
-        Templating::render('template.php', 'errors/404.html');
+        Renderer::render('template.php', 'errors/404.html');
     }
 
     public function url($name, $params = []) 
     {
         if(!isset($this->namedRoutes[$name])) {
-            Templating::render('template.php', 'errors/404.html');
+            Renderer::render('template.php', 'errors/404.html');
         }
         return $this->namedRoutes[$name]->getUrl($params);
     }

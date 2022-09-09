@@ -6,14 +6,24 @@
     Description: Controller of exercices.
 */
 namespace App\Controllers;
+use App\Controller\Controller;
+use App\Renderer\Renderer;
 
-use App\Services\Templating;
-
-class ExerciseController
+class ExerciseController extends Controller
 {
-    public static function new()
+    public function new()
     {
-        Templating::render('template.php', 'exercise/new.php',[
+        $this->render('template.php', 'exercise/new.php',[
+            "headerColor" => "managing",
+            "headerTitle" => "New exercise",
+        ]);
+    }
+
+    public function newPost()
+    {
+        $exercise = $_POST['exercise'];
+
+        $this->render('template.php', 'exercise/new.php',[
             "headerColor" => "managing",
             "headerTitle" => "New exercise",
         ]);

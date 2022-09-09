@@ -1,9 +1,3 @@
-<!--
-    Project: ExerciseLooper - Maw1.1
-    Author: Noah Barberini
-    Date: 02.09.2022
-    Description: Template for the website
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>

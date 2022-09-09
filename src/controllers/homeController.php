@@ -6,11 +6,11 @@
     Description: Home controller
 */
 namespace App\Controllers;
-use App\Services\Templating;
+use App\Controller\Controller;
 
-class HomeController 
+class HomeController extends Controller
 {
-    public static function index() {
-        Templating::render('homeTemplate.php', 'home/index.php');
+    public function index() {
+        $this->render('homeTemplate.php', 'home/index.php');
     }
 }
