@@ -2,8 +2,8 @@
 /*
     Project: ExerciseLooper - MAW1.1
     Author: Thomas Grossmann
-    Date: 09.09.2022
-    Description: 
+    Date: 12.09.2022
+    Description: Model Class with centralization of all SQL queries
 */
 
 namespace App\Models;
@@ -30,15 +30,11 @@ class Model {
         }
     }
 
-    public function insert($table, $fields, $value = "") 
+    public function insert($table, $fields, $values) 
     {
-        $query = "INSERT INTO $fields FROM $table $value";
+        $query = "INSERT INTO $table ($fields) VALUES ($values)";
         $statement = $this->connection->prepare($query);
-        if ($statement->execute()) {
-            while ($rows = $statement->fetch()) {
-                $fetch[] = $rows;
-            }
-            return $fetch;
-        }
+        $statement->execute();
+        return $this->connection->lastInsertId();
     }
 }

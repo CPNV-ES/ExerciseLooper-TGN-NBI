@@ -1,5 +1,10 @@
 <?php
-
+/*
+    Project: ExerciseLooper - Maw1.1
+    Author: Thomas Grossmann
+    Date: 12.09.2022
+    Description: Class Database that create the PDO Connection using the Singleton Pattern
+*/
 namespace App\Models;
 
 use PDO;
@@ -41,4 +46,3 @@ class Database
         return $this->connection;
     }
 }
-//$conn = $db->getConnection();
