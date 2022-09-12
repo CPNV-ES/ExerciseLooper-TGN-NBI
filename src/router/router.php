@@ -7,18 +7,18 @@
 */
 namespace App\Router;
 
-require(SOURCE_DIR.'/router/route.php');
+require_once(SOURCE_DIR.'/router/route.php');
 use App\Router\Route as Route;
 use App\Renderer\Renderer;
 
 class Router 
 {
-
+    private static $instance;
     private $url;
     private $routes = [];
     private $namedRoutes = [];
 
-    public function __construct($url) 
+    private function __construct($url) 
     {
         $this->url = $url;
     }
@@ -64,5 +64,13 @@ class Router
             Renderer::render('template.php', 'errors/404.html');
         }
         return $this->namedRoutes[$name]->getUrl($params);
+    }
+
+    public static function getInstance($url)
+    {
+        if (!self::$instance) {
+            self::$instance = new Router($url);
+        }
+        return self::$instance;
     }
 }

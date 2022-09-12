@@ -1,14 +1,29 @@
 <?php
 namespace App\Controller;
+use App\Router\Router as Router;
+use App\Renderer\Renderer as Renderer;
 class Controller {
-    public function render($template, $content, $data = []) {
-        if ($template) {
-            ob_start();
-            include(SOURCE_DIR."/views/$content");
-            $content = ob_get_clean();
-            include(SOURCE_DIR."/views/templates/$template");
+    
+    protected $router;
+
+    public function __construct() 
+    {
+        $this->router = Router::getInstance($_SERVER['REQUEST_URI']);
+    }
+
+    public function render($template, $content, $data = []) 
+    {
+        return Renderer::render($template, $content, $data);
+    }
+
+    public function redirect($route) 
+    {
+        if (strpos($route, "/")) {
+            header('Location:' . $route);
         } else {
-            include(SOURCE_DIR."/views/$content");
+            $namedRoute = $this->router->url($route);
+            header('Location:/'.$namedRoute);
         }
     }
+
 }

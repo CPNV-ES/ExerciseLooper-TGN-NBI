@@ -10,7 +10,8 @@ use App\Controller\Controller;
 
 class HomeController extends Controller
 {
-    public function index() {
+    public function index() 
+    {
         $this->render('homeTemplate.php', 'home/index.php');
     }
 }

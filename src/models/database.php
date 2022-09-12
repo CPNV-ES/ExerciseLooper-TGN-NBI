@@ -41,4 +41,3 @@ class Database
         return $this->connection;
     }
 }
-//$conn = $db->getConnection();

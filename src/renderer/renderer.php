@@ -9,12 +9,15 @@
 namespace App\Renderer;
 class Renderer 
 {
-    public static function render() 
+    public static function render($template, $content, $data = []) 
     {
-
-    }
-    public function redirect() 
-    {
-        var_dump($router);
+        if ($template) {
+            ob_start();
+            include(SOURCE_DIR."/views/$content");
+            $content = ob_get_clean();
+            include(SOURCE_DIR."/views/templates/$template");
+        } else {
+            include(SOURCE_DIR."/views/$content");
+        }
     }
 }
