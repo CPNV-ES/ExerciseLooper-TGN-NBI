@@ -2,8 +2,8 @@
 /*
     Project: ExerciseLooper - MAW1.1
     Author: Thomas Grossmann
-    Date: 09.09.2022
-    Description: PDO Instanciation and model functions related to Exercises
+    Date: 12.09.2022
+    Description: Exercices Model calling Model Class 
 */
 
 namespace App\Models;
