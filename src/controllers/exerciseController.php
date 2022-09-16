@@ -41,8 +41,7 @@ class ExerciseController extends Controller
     public function newPost()
     {
         $exercise = $_POST['exercise'];
-        $exercises = new Exercise();
-        $exercises->create('title',$exercise['title']);
+        $newExercise = Exercise::create($exercise['title']);
         $this->redirect('newExercise');
     }
 }
