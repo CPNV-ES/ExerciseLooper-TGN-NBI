@@ -29,11 +29,23 @@ class Model {
             return $fetch;
         }
     }
-
+    /* /!\ CODE TO REFACTOR ! */
     public function insert($table, $fields, $values) 
     {
-        $query = "INSERT INTO $table ($fields) VALUES ($values)";
+        $splitedValues = explode(',', $values);
+        $splitedFields = explode(',', $fields);
+        $bindedFields = array_map(function($value) {
+            return ":$value";
+        }, $splitedFields);
+        $strBindedFields = implode(',',$bindedFields);
+        
+        $query = "INSERT INTO $table ($fields) VALUES ($strBindedFields)";
         $statement = $this->connection->prepare($query);
+
+        for($i = 0; $i < count($splitedValues); $i++) {
+            $statement->bindParam($bindedFields[$i], $splitedValues[$i]);
+        }
+
         $statement->execute();
         return $this->connection->lastInsertId();
     }

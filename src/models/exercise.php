@@ -8,18 +8,21 @@
 
 namespace App\Models;
 
+
 require_once(SOURCE_DIR.'/models/model.php');
 use App\Models\Model as Model;
 
-class ExercisesModel extends Model
+define('TABLE', 'exercises');
+
+class Exercise extends Model
 {
     public function getAll()
     {
         return $this->select("exercises", "*");
     }
 
-    /*public function create()
+    public function create($fields, $values)
     {
-        return $this->insert();
-    }*/
+        return $this->insert(TABLE, $fields, $values);
+    }
 }

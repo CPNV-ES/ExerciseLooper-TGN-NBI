@@ -10,10 +10,5 @@
         <div class="actions">
             <input type="submit" name="commit" value="Create Exercise" data-disable-with="Create Exercise">
         </div>
-        <div>
-            <?php foreach ($data['exercises'] as $exercise): ?>
-                <p><?= $exercise['title'] ?></p>
-            <?php endforeach; ?>
-        </div>
     </form>
 </main>

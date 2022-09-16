@@ -9,6 +9,9 @@ namespace App\Controllers;
 use App\Controller\Controller;
 use App\Renderer\Renderer;
 
+require_once(SOURCE_DIR.'/models/exercise.php');
+use App\Models\Exercise;
+
 class ExerciseController extends Controller
 {
     public function new()
@@ -24,6 +27,8 @@ class ExerciseController extends Controller
     public function newPost()
     {
         $exercise = $_POST['exercise'];
+        $exercises = new Exercise();
+        $exercises->create('title',$exercise['title']);
         $this->redirect('newExercise');
     }
 }
