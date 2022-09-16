@@ -24,6 +24,20 @@ class ExerciseController extends Controller
         ]);
     }
 
+    public function answering()
+    {
+        $this->render('template.php', 'exercise/answering.php', [
+            "headerColor" => "answering",
+        ]);
+    }
+
+    public function manage()
+    {
+        $this->render('template.php', 'exercise/manage.php', [
+            "headerColor" => "results",
+        ]);
+    }
+
     public function newPost()
     {
         $exercise = $_POST['exercise'];

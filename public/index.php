@@ -23,4 +23,8 @@ $router->get('/', "home#index", "home");
 $router->get('/exercises/new', "exercise#new", "newExercise");
 $router->post('/exercises/new',"exercise#newPost", "newExercisePost");
 
+$router->get('/exercises/answering', "exercise#answering");
+
+$router->get('/exercises', "exercise#manage");
+
 $router->run();
