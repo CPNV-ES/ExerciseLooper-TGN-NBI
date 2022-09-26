@@ -26,15 +26,23 @@ class ExerciseController extends Controller
 
     public function answering()
     {
+        $exercises = Exercise::getExercises("WHERE state='Answering'");
         $this->render('template.php', 'exercise/answering.php', [
             "headerColor" => "answering",
+            "exercises" => $exercises,
         ]);
     }
 
     public function manage()
     {
+        $exercisesBuilding = Exercise::getExercises("WHERE state='Building'");
+        $exercisesAnswering = Exercise::getExercises("WHERE state='Answering'");
+        $exercisesClosed = Exercise::getExercises("WHERE state='Closed'");
         $this->render('template.php', 'exercise/manage.php', [
             "headerColor" => "results",
+            "exercisesBuilding" => $exercisesBuilding,
+            "exercisesAnswering" => $exercisesAnswering,
+            "exercisesClosed" => $exercisesClosed,
         ]);
     }
 
