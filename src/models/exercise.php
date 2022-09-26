@@ -17,9 +17,12 @@ class Exercise extends Model
     private const TABLE = 'exercises';
     protected $id; 
     protected $title;
-    public function __construct($id, $title) {
+    protected $state;
+
+    public function __construct($id, $title, $state) {
         $this->id = $id;
         $this->title = $title;
+        $this->state = $state;
     }
     public function getID() 
     {
@@ -33,11 +36,20 @@ class Exercise extends Model
         $this->title = $title;
     }
 
+    public function getState()
+    {
+        return $this->state;
+    }
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
     public function sync() {
         $this->update(
             self::TABLE,
-            ['title'],
-            [$this->title],
+            ['title', 'state'],
+            [$this->title,$this->state],
             $this->id
         );
     }
@@ -53,15 +65,16 @@ class Exercise extends Model
                 new self(
                     $exercise['id'],
                     $exercise['title'],
+                    $exercise['state']
                 )
             );
         }
         return $result;
     }
 
-    public static function create($title)
+    public static function create($title, $state = "Building")
     {
-        $id = self::insert(self::TABLE, 'title', $title);
-        return new self($id, $title);
+        $id = self::insert(self::TABLE, 'title,state', "$title,$state");
+        return new self($id, $title, $state);
     }
 }
