@@ -16,12 +16,12 @@ class Controller {
         return Renderer::render($template, $content, $data);
     }
 
-    public function redirect($route) 
+    public function redirect($route, $params=[]) 
     {
         if (strpos($route, "/")) {
             header('Location:' . $route);
         } else {
-            $namedRoute = $this->router->url($route);
+            $namedRoute = $this->router->url($route, $params);
             header('Location:/'.$namedRoute);
         }
     }

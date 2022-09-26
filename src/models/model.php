@@ -77,5 +77,6 @@ class Model
     {
         self::$connection = $instance;
     }
+    
 }
 Model::initConnection(Database::getInstance()->getConnection());

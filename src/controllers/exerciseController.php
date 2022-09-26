@@ -24,6 +24,13 @@ class ExerciseController extends Controller
         ]);
     }
 
+    public function fieldsCreation($id) {
+        
+        $this->render('template.php', 'exercise/fieldsCreation.php', [
+
+        ]);
+    }
+
     public function answering()
     {
         $exercises = Exercise::getExercises("WHERE state='Answering'");
@@ -50,6 +57,6 @@ class ExerciseController extends Controller
     {
         $exercise = $_POST['exercise'];
         $newExercise = Exercise::create($exercise['title']);
-        $this->redirect('newExercise');
+        $this->redirect('fieldsCreation', ["id" => $newExercise->getID()]);
     }
 }
