@@ -11,6 +11,7 @@ require_once(SOURCE_DIR."/models/database.php");
 use App\Models\Database as Database;
 
 class Model {
+
     protected static $connection;
 
     public static function select($table, $fields, $where = "") 
@@ -46,7 +47,7 @@ class Model {
         return self::$connection->lastInsertId();
     }
 
-   public function update($table,$fields, $values, $id) 
+    public function update($table,$fields, $values, $id) 
     {
         $strValues = "";
         for($i = 0; $i < count($fields); $i++) {
@@ -64,8 +65,10 @@ class Model {
         $statement->bindParam(":id", $id);
         $statement->execute();
     }
+
     public static function initConnection($instance) {
         self::$connection = $instance;
     }
+    
 }
 Model::initConnection(Database::getInstance()->getConnection());

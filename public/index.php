@@ -28,4 +28,6 @@ $router->get('/exercises/answering', "exercise#answering");
 
 $router->get('/exercises', "exercise#manage");
 
+$router->get('/exercises/:id/fields', "exercise#fieldsCreation", "fieldsCreation");
+
 $router->run();

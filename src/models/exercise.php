@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
     Project: ExerciseLooper - MAW1.1
     Author: Thomas Grossmann
@@ -9,31 +9,39 @@
 namespace App\Models;
 
 
-require_once(SOURCE_DIR.'/models/model.php');
+require_once(SOURCE_DIR . '/models/model.php');
+
 use App\Models\Model as Model;
 
 class Exercise extends Model
 {
     private const TABLE = 'exercises';
-    protected $id; 
+    protected $id;
     protected $title;
-    public function __construct($id, $title) {
+
+    public function __construct($id, $title)
+    {
         $this->id = $id;
         $this->title = $title;
     }
-    public function getID() 
+
+    public function getID()
     {
         return $this->id;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
-    public function setTitle($title) {
+
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
-    public function sync() {
+    public function sync()
+    {
         $this->update(
             self::TABLE,
             ['title'],
@@ -42,12 +50,11 @@ class Exercise extends Model
         );
     }
 
-
     public static function getAll()
     {
         $result = [];
         $data = self::select("exercises", "*");
-        foreach($data as $exercise) {
+        foreach ($data as $exercise) {
             array_push(
                 $result,
                 new self(

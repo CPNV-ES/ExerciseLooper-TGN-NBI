@@ -33,6 +33,7 @@ class Database
             die("Failed to connect to DB : " . $e->getMessage());
         }
     }
+    
     public static function getInstance()
     {
         if (!self::$instance) {
