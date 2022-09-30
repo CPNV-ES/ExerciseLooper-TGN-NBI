@@ -20,10 +20,11 @@ $router->get('/', "home#index", "home");
 //Exercises routes
 $router->get('/exercises/new', "exercise#new", "newExercise");
 $router->post('/exercises/new', "exercise#newPost", "newExercisePost");
+$router->post('/exercises/:id/delete', "exercise#delete", "deleteExercise");
 
 $router->get('/exercises/answering', "exercise#answering");
 
-$router->get('/exercises', "exercise#manage");
+$router->get('/exercises', "exercise#manage", "manage");
 
 $router->get('/exercises/:id/fields', "exercise#fieldsCreation", "fieldsCreation");
 

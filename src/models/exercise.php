@@ -43,9 +43,14 @@ class Exercise extends Model
     {
         return $this->state;
     }
+
     public function setState($state)
     {
         $this->state = $state;
+    }
+
+    public function destroy() {
+        $this->delete(self::TABLE, $this->id);
     }
 
     public function sync()
@@ -58,7 +63,7 @@ class Exercise extends Model
         );
     }
 
-    public static function getAll($where = "")
+    public static function getAll($where = [])
     {
         $result = [];
         $data = self::select("exercises", "*", $where);
@@ -73,6 +78,17 @@ class Exercise extends Model
             );
         }
         return $result;
+    }
+
+    public static function getOne($id) {
+        $exercise = self::select("exercises", "*", ["id" => $id]);
+        if($exercise) {
+            return new self(
+                $exercise['id'],
+                $exercise['title'],
+                $exercise['state']
+            );
+        }
     }
 
     public static function create($title, $state = "Building")

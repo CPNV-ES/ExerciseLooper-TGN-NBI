@@ -15,7 +15,7 @@ class ExerciseController extends Controller
 {
     public function new()
     {
-        $formNewExerciseURL = $this->router->url("newExercisePost");
+        $formNewExerciseURL = $this->router->getUrl("newExercisePost");
         $this->render('template.php', 'exercise/new.php', [
             "headerColor" => "managing",
             "headerTitle" => "New exercise",
@@ -29,9 +29,15 @@ class ExerciseController extends Controller
         $this->render('template.php', 'exercise/fieldsCreation.php', []);
     }
 
+    public function delete($id) {
+        $exercise = Exercise::getOne($id);
+        $exercise->destroy();
+        $this->redirect('manage');
+    }
+
     public function answering()
     {
-        $exercises = Exercise::getAll("WHERE state='Answering'");
+        $exercises = Exercise::getAll(["state" => 'Answering']);
         $this->render('template.php', 'exercise/answering.php', [
             "headerColor" => "answering",
             "exercises" => $exercises,
@@ -40,10 +46,9 @@ class ExerciseController extends Controller
 
     public function manage()
     {
-        $exercisesBuilding = Exercise::getAll("WHERE state='Building'");
-        $exercisesAnswering = Exercise::getAll("WHERE state='Answering'");
-        $exercisesClosed = Exercise::getAll("WHERE state='Closed'");
-
+        $exercisesBuilding = Exercise::getAll(["state" => 'Building']);
+        $exercisesAnswering = Exercise::getAll(["state" => 'Answering']);
+        $exercisesClosed = Exercise::getAll(["state" => 'Closed']);
         $this->render('template.php', 'exercise/manage.php', [
             "headerColor" => "results",
             "exercisesBuilding" => $exercisesBuilding,

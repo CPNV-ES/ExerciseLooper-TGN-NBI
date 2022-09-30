@@ -10,13 +10,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($data['exercisesBuilding'] as $exBuild) : ?>
+                    <?php foreach ($data['exercisesBuilding'] as $exBuilding) : ?>
                         <tr>
-                            <td><?= $exBuild->getTitle() ?></td>
+                            <td><?= $exBuilding->getTitle() ?></td>
                             <td>
-                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="/exercises/<?= $exBuild->getID() ?>?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
-                                <a title="Manage fields" href="/exercises/<?= $exBuild->getID() ?>/fields"><i class="fa fa-edit"></i></a>
-                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href="/exercises/<?= $exBuild->getID() ?>"><i class="fa fa-trash"></i></a>
+                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="/exercises/<?= $exBuilding->getID() ?>?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
+                                <a title="Manage fields" href="/exercises/<?= $exBuilding->getID() ?>/fields"><i class="fa fa-edit"></i></a>
+                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href=""><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -64,7 +64,7 @@
                             <td><?= $exClosed->getTitle() ?></td>
                             <td>
                                 <a title="Show results" href="/exercises/<?= $exClosed->getID() ?>/results"><i class="fa fa-chart-bar"></i></a>
-                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href="/exercises/<?= $exClosed->getID() ?>"><i class="fa fa-trash"></i></a>
+                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href=""><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -10,14 +10,22 @@ namespace Src\Models;
 
 use Src\Models\Database;
 
+use function PHPSTORM_META\type;
+
 class Model
 {
     protected static $connection;
 
-    public static function select($table, $fields, $where = "")
+    public static function select($table, $fields, $where = [])
     {
-        $query = "SELECT $fields FROM $table $where";
+        $strWhere = self::generateWhere($where);
+        $query = "SELECT $fields FROM $table $strWhere";
         $statement = self::$connection->prepare($query);
+
+        foreach($where as $key => $value) {
+            $statement->bindParam(":$key",$value);
+        }
+
         if ($statement->execute()) {
             while ($rows = $statement->fetch()) {
                 $fetch[] = $rows;
@@ -25,6 +33,18 @@ class Model
             return $fetch;
         }
     }
+
+    private static function generateWhere($where) {
+        if (!empty($where)) {
+            $strWhere = "WHERE ";
+            foreach ($where as $key => $value) {
+                    $strWhere .= "$key = :$key,";
+            }
+            $strWhere = substr($strWhere, 0 , -1);
+            return $strWhere;
+        }
+        return "";
+    } 
 
     /* /!\ CODE TO REFACTOR ! */
     public static function insert($table, $fields, $values)
@@ -66,8 +86,16 @@ class Model
         $statement->execute();
     }
 
-    public function delete($table, $fields, $id)
+    public function delete($table, $where)
     {
+        $strWhere = self::generateWhere($where);
+        $query = "DELETE FROM $table $strWhere";
+        $statement = self::$connection->prepare($query);
+
+        foreach($where as $key => $value) {
+            $statement->bindParam(":$key",$value);
+        }
+        $statement->execute();
     }
 
     public static function initConnection($instance)

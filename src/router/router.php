@@ -58,7 +58,7 @@ class Router
         Renderer::render('template.php', 'errors/404.html');
     }
 
-    public function url($name, $params = [])
+    public function getUrl($name, $params = [])
     {
         if (!isset($this->namedRoutes[$name])) {
             Renderer::render('template.php', 'errors/404.html');
