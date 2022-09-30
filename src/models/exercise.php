@@ -59,10 +59,10 @@ class Exercise extends Model
         );
     }
 
-    public static function getAll()
+    public static function getAll($where = "")
     {
         $result = [];
-        $data = self::select("exercises", "*");
+        $data = self::select("exercises", "*", $where);
         foreach ($data as $exercise) {
             array_push(
                 $result,
