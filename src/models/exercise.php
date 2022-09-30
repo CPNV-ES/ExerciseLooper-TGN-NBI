@@ -6,12 +6,9 @@
     Description: Exercices Model calling Model Class 
 */
 
-namespace App\Models;
+namespace Src\Models;
 
-
-require_once(SOURCE_DIR . '/models/model.php');
-
-use App\Models\Model as Model;
+use Src\Models\Model;
 
 class Exercise extends Model
 {

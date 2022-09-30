@@ -5,7 +5,8 @@
     Date: 12.09.2022
     Description: Class Database that create the PDO Connection using the Singleton Pattern
 */
-namespace App\Models;
+
+namespace Src\Models;
 
 use PDO;
 use PDOException;
@@ -33,7 +34,7 @@ class Database
             die("Failed to connect to DB : " . $e->getMessage());
         }
     }
-    
+
     public static function getInstance()
     {
         if (!self::$instance) {
@@ -42,7 +43,8 @@ class Database
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->connection;
     }
 }

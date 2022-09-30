@@ -6,11 +6,9 @@
     Description: Model Class with centralization of all SQL queries
 */
 
-namespace App\Models;
+namespace Src\Models;
 
-require_once(SOURCE_DIR . "/models/database.php");
-
-use App\Models\Database as Database;
+use Src\Models\Database;
 
 class Model
 {
@@ -70,13 +68,11 @@ class Model
 
     public function delete($table, $fields, $id)
     {
-        
     }
 
     public static function initConnection($instance)
     {
         self::$connection = $instance;
     }
-    
 }
 Model::initConnection(Database::getInstance()->getConnection());

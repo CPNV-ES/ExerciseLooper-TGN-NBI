@@ -6,14 +6,10 @@
     Description: Controller of exercices.
 */
 
-namespace App\Controllers;
+namespace Src\Controllers;
 
-use App\Controller\Controller;
-use App\Renderer\Renderer;
-
-require_once(SOURCE_DIR . '/models/exercise.php');
-
-use App\Models\Exercise;
+use Src\Controllers\Controller;
+use Src\Models\Exercise;
 
 class ExerciseController extends Controller
 {

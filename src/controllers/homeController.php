@@ -5,12 +5,14 @@
     Date: 02.09.2022
     Description: Home controller
 */
-namespace App\Controllers;
-use App\Controller\Controller;
+
+namespace Src\Controllers;
+
+use Src\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $this->render('homeTemplate.php', 'home/index.php');
     }
