@@ -1,10 +1,12 @@
 <main class="container">
   <ul class="ansering-list">
-    <li class="row">
-      <div class="column card">
-        <div class="title">Exemple123</div>
-        <a class="button" href="/exercises/589/fulfillments/new">Take it</a>
-      </div>
-    </li>
+    <?php foreach ($data['exercises'] as $exercise) : ?>
+      <li class="row">
+        <div class="column card">
+          <div class="title"><?= $exercise->getTitle() ?></div>
+          <a class="button" href="/exercices/<?= $exercise->getID() ?>/fulfillments/new">Take it</a>
+        </div>
+      </li>
+    <?php endforeach; ?>
   </ul>
 </main>

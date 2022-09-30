@@ -20,7 +20,8 @@ class Exercise extends Model
     protected $title;
     protected $state;
 
-    public function __construct($id, $title, $state) {
+    public function __construct($id, $title, $state)
+    {
         $this->id = $id;
         $this->title = $title;
         $this->state = $state;
@@ -50,11 +51,12 @@ class Exercise extends Model
         $this->state = $state;
     }
 
-    public function sync() {
+    public function sync()
+    {
         $this->update(
             self::TABLE,
             ['title', 'state'],
-            [$this->title,$this->state],
+            [$this->title, $this->state],
             $this->id
         );
     }
