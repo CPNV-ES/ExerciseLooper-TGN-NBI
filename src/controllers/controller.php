@@ -25,7 +25,7 @@ class Controller
         if (strpos($route, "/")) {
             header('Location:' . $route);
         } else {
-            $namedRoute = $this->router->url($route, $params);
+            $namedRoute = $this->router->getUrl($route, $params);
             header('Location:/' . $namedRoute);
         }
     }

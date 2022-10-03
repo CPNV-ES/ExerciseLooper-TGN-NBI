@@ -23,12 +23,6 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function fieldsCreation($id)
-    {
-
-        $this->render('template.php', 'exercise/fieldsCreation.php', []);
-    }
-
     public function delete($id) {
         $exercise = Exercise::getOne($id);
         $exercise->destroy();
@@ -54,6 +48,7 @@ class ExerciseController extends Controller
             "exercisesBuilding" => $exercisesBuilding,
             "exercisesAnswering" => $exercisesAnswering,
             "exercisesClosed" => $exercisesClosed,
+            //"getUrl" => call_user_func($this->router->getUrl),
         ]);
     }
 
@@ -61,6 +56,6 @@ class ExerciseController extends Controller
     {
         $exercise = $_POST['exercise'];
         $newExercise = Exercise::create($exercise['title']);
-        $this->redirect('fieldsCreation', ["id" => $newExercise->getID()]);
+        $this->redirect('newField', ["id" => $newExercise->getID()]);
     }
 }

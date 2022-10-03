@@ -9,6 +9,7 @@
 namespace Src\Models;
 
 use Src\Models\Model;
+use Src\Models\Field;
 
 class Exercise extends Model
 {
@@ -16,12 +17,14 @@ class Exercise extends Model
     protected $id;
     protected $title;
     protected $state;
+    protected $fields = [];
 
-    public function __construct($id, $title, $state)
+    public function __construct($id, $title, $state, $fields = [])
     {
         $this->id = $id;
         $this->title = $title;
         $this->state = $state;
+        $this->fields = $fields;
     }
 
     public function getID()
@@ -49,7 +52,13 @@ class Exercise extends Model
         $this->state = $state;
     }
 
-    public function destroy() {
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    public function destroy()
+    {
         $this->delete(self::TABLE, $this->id);
     }
 
@@ -68,25 +77,30 @@ class Exercise extends Model
         $result = [];
         $data = self::select("exercises", "*", $where);
         foreach ($data as $exercise) {
+            $fields = Field::getAll(["exercises_id" => $exercise['id']]);
             array_push(
                 $result,
                 new self(
                     $exercise['id'],
                     $exercise['title'],
-                    $exercise['state']
+                    $exercise['state'],
+                    $fields,
                 )
             );
         }
         return $result;
     }
 
-    public static function getOne($id) {
-        $exercise = self::select("exercises", "*", ["id" => $id]);
-        if($exercise) {
+    public static function getOne($id)
+    {
+        $exercise = self::select("exercises", "*", ["id" => $id])[0];
+        if ($exercise) {
+            $fields = Field::getAll(["exercises_id" => $id]);
             return new self(
                 $exercise['id'],
                 $exercise['title'],
-                $exercise['state']
+                $exercise['state'],
+                $fields,
             );
         }
     }

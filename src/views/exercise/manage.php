@@ -14,8 +14,10 @@
                         <tr>
                             <td><?= $exBuilding->getTitle() ?></td>
                             <td>
-                                <a title="Be ready for answers" rel="nofollow" data-method="put" href="/exercises/<?= $exBuilding->getID() ?>?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
-                                <a title="Manage fields" href="/exercises/<?= $exBuilding->getID() ?>/fields"><i class="fa fa-edit"></i></a>
+                                <?php if (!empty($exBuilding->getFields())): ?>
+                                    <a title="Be ready for answers" rel="nofollow" data-method="put" href="/exercises/<?= $exBuilding->getID() ?>?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
+                                <?php endif; ?>
+                                <a title="Manage fields" href=""><i class="fa fa-edit"></i></a>
                                 <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href=""><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>

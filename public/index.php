@@ -26,6 +26,7 @@ $router->get('/exercises/answering', "exercise#answering");
 
 $router->get('/exercises', "exercise#manage", "manage");
 
-$router->get('/exercises/:id/fields', "exercise#fieldsCreation", "fieldsCreation");
+$router->get('/exercises/:id/fields', "field#new", "newField");
+$router->post('/exercises/:id/fields', "field#newPost", "newFieldPost");
 
 $router->run();

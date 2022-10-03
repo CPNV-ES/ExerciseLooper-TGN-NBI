@@ -61,7 +61,7 @@ class Router
     public function getUrl($name, $params = [])
     {
         if (!isset($this->namedRoutes[$name])) {
-            Renderer::render('template.php', 'errors/404.html');
+            return null;
         }
         return $this->namedRoutes[$name]->getUrl($params);
     }
