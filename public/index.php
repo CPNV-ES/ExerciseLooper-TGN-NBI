@@ -19,12 +19,16 @@ $router->get('/', "home#index", "home");
 
 //Exercises routes
 $router->get('/exercises/new', "exercise#new", "newExercise");
+
 $router->post('/exercises/new', "exercise#newPost", "newExercisePost");
+
 $router->post('/exercises/:id/delete', "exercise#delete", "deleteExercise");
 
-
 $router->get('/exercises/:id/fields', "field#new", "newField");
+
 $router->post('/exercises/:id/fields', "field#newPost", "newFieldPost");
+
+$router->get('/exercises/:id/fulfillments/new', "fulfillment#new","newFulfillment");
 
 $router->post('/exercises/:id/:state', "exercise#updateState", "updateState");
 

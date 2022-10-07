@@ -45,6 +45,7 @@ class ExerciseController extends Controller
         $this->render('template.php', 'exercise/answering.php', [
             "headerColor" => "answering",
             "exercises" => $exercises,
+            "router" => $this->router,
         ]);
     }
 

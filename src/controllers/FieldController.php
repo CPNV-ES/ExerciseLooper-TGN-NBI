@@ -19,7 +19,7 @@ class FieldController extends Controller
         $exercise = Exercise::getOne($id);
         if ($exercise) {
             $fields = $exercise->getFields();
-            $this->render('template.php', 'exercise/newField.php', [
+            $this->render('template.php', 'fields/new.php', [
                 "headerColor" => "managing",
                 "headerTitle" => "Exercise : <span class='bold'>" . $exercise->getTitle() . "</span>",
                 "formNewFieldURL" => $formNewFieldURL,

@@ -4,7 +4,7 @@
       <li class="row">
         <div class="column card">
           <div class="title"><?= $exercise->getTitle() ?></div>
-          <a class="button" href="/exercices/<?= $exercise->getID() ?>/fulfillments/new">Take it</a>
+          <a class="button" href="/<?= $data['router']->getUrl("newFulfillment", ["id" => $exercise->getID()]) ?>">Take it</a>
         </div>
       </li>
     <?php endforeach; ?>
