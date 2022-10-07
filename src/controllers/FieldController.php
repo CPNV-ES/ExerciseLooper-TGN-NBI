@@ -25,6 +25,7 @@ class FieldController extends Controller
                 "formNewFieldURL" => $formNewFieldURL,
                 "exerciseId" => $id,
                 "fields" => $fields,
+                "router" => $this->router
             ]);
             return;
         }
@@ -39,4 +40,10 @@ class FieldController extends Controller
         $this->redirect('newField', ["id" => $exerciseId]);
     }
 
+    public function delete($exerciseId, $fieldId)
+    {
+        $field = Field::getOne($fieldId);
+        $field->destroy();
+        $this->redirect('newField', ["id" => $exerciseId]);
+    }
 }

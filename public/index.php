@@ -30,6 +30,8 @@ $router->post('/exercises/:id/fields', "field#newPost", "newFieldPost");
 
 $router->get('/exercises/:id/fulfillments/new', "fulfillment#new","newFulfillment");
 
+$router->post('/exercises/:id/fields/:field/delete', "field#delete", "deleteField");
+
 $router->post('/exercises/:id/:state', "exercise#updateState", "updateState");
 
 $router->get('/exercises/answering', "exercise#answering");

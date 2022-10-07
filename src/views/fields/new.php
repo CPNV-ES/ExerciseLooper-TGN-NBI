@@ -15,7 +15,11 @@
                         <tr>
                             <td><?= $field->getTitle() ?></td>
                             <td><?= $field->getField() ?></td>
-                            <td><button>icon</button></td>
+                            <td>
+                            <form action="/<?= $data['router']->getUrl('deleteField', ["id" => $data['exerciseId'], "field" => $field->getID()])?>" method="POST" class="form-hide">
+                                    <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
+                                </form>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
