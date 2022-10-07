@@ -44,11 +44,11 @@ class ExerciseController extends Controller
         $exercisesAnswering = Exercise::getAll(["state" => 'Answering']);
         $exercisesClosed = Exercise::getAll(["state" => 'Closed']);
         $this->render('template.php', 'exercise/manage.php', [
+            "router" => $this->router,
             "headerColor" => "results",
             "exercisesBuilding" => $exercisesBuilding,
             "exercisesAnswering" => $exercisesAnswering,
             "exercisesClosed" => $exercisesClosed,
-            //"getUrl" => call_user_func($this->router->getUrl),
         ]);
     }
 

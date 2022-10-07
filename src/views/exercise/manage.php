@@ -17,8 +17,11 @@
                                 <?php if (!empty($exBuilding->getFields())): ?>
                                     <a title="Be ready for answers" rel="nofollow" data-method="put" href="/exercises/<?= $exBuilding->getID() ?>?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i></a>
                                 <?php endif; ?>
-                                <a title="Manage fields" href=""><i class="fa fa-edit"></i></a>
-                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href=""><i class="fa fa-trash"></i></a>
+                                <a title="Manage fields" href="<?= $data['router']->getUrl('newField', ["id" => $exBuilding->getID()]) ?>"><i class="fa fa-edit"></i></a>
+                                <form action="<?= $data['router']->getUrl('deleteExercise', ["id" => $exBuilding->getID()])?>" method="POST" style="width:auto;display:inline-block;height:auto;padding:0;margin:0;">
+                                    <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
+                                </form>
+                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href=""></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -10,8 +10,6 @@ namespace Src\Models;
 
 use Src\Models\Database;
 
-use function PHPSTORM_META\type;
-
 class Model
 {
     protected static $connection;
@@ -91,7 +89,6 @@ class Model
         $strWhere = self::generateWhere($where);
         $query = "DELETE FROM $table $strWhere";
         $statement = self::$connection->prepare($query);
-
         foreach($where as $key => $value) {
             $statement->bindParam(":$key",$value);
         }

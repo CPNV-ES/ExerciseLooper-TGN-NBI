@@ -16,6 +16,7 @@ class Field extends Model
     private const TABLE = "fields";
     protected $id;
     protected $title;
+    protected $field;
     protected $exerciseId;
 
     public function __construct($id, $title, $exerciseId)
@@ -38,6 +39,14 @@ class Field extends Model
     public function setTitle($title)
     {
         $this->title = $title;
+    }
+
+    public function getField() {
+        return $this->field;
+    }
+
+    public function setField($field) {
+        $this->field = $field;
     }
 
     public function sync()
@@ -79,7 +88,7 @@ class Field extends Model
         }
     }
 
-    public static function create($title, $exercise)
+    public static function create($title,$field, $exercise)
     {
         $exerciseId = null;
         $exerciseType = gettype($exercise);
@@ -90,8 +99,8 @@ class Field extends Model
         }
 
         if($exerciseId != null) {
-            $id = self::insert(self::TABLE, 'title,exercises_id', "$title,$exerciseId");
-            return new self($id, $title, $exerciseId);
+            $id = self::insert(self::TABLE, 'title,field,exercises_id', "$title,$field,$exerciseId");
+            return new self($id, $title,$field, $exerciseId);
         }
     }
 

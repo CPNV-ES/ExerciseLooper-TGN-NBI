@@ -17,21 +17,25 @@ class FieldController extends Controller
     {
         $formNewFieldURL = $this->router->getUrl("newField", ["id" => $id]);
         $exercise = Exercise::getOne($id);
-        $fields = $exercise->getFields();
-        $this->render('template.php', 'exercise/newField.php', [
-            "headerColor" => "managing",
-            "headerTitle" => "Exercise : <span class='bold'>" . $exercise->getTitle() . "</span>",
-            "formNewFieldURL" => $formNewFieldURL,
-            "exerciseId" => $id,
-            "fields" => $fields,
-        ]);
+        if ($exercise) {
+            $fields = $exercise->getFields();
+            $this->render('template.php', 'exercise/newField.php', [
+                "headerColor" => "managing",
+                "headerTitle" => "Exercise : <span class='bold'>" . $exercise->getTitle() . "</span>",
+                "formNewFieldURL" => $formNewFieldURL,
+                "exerciseId" => $id,
+                "fields" => $fields,
+            ]);
+            return;
+        }
+        $this->render('template.php', 'errors/404.html');
     }
 
     public function newPost()
     {
         $field = $_POST['field'];
         $exerciseId = $field['exerciseId'];
-        $newField = Field::create($field['title'], $exerciseId);
+        $newField = Field::create($field['title'],$field['field'], $exerciseId);
         $this->redirect('newField', ["id" => $exerciseId]);
     }
 
