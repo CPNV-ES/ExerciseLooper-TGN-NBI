@@ -14,7 +14,7 @@
                     <?php foreach ($data['fields'] as $field) : ?>
                         <tr>
                             <td><?= $field->getTitle() ?></td>
-                            <td></td>
+                            <td><?= $field->getField() ?></td>
                             <td><button>icon</button></td>
                         </tr>
                     <?php endforeach; ?>

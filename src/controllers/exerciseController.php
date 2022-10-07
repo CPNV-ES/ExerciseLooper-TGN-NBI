@@ -29,11 +29,13 @@ class ExerciseController extends Controller
         $this->redirect('manage');
     }
 
-    public function updateState($id)
+    public function updateState($id, $state)
     {
         $exercise = Exercise::getOne($id);
-        $exercise->setState("Answering");
-        $exercise->sync();
+        if ($state == "Answering" || $state == "Closed") {
+            $exercise->setState($state);
+            $exercise->sync();
+        }
         $this->redirect('manage');
     }
 

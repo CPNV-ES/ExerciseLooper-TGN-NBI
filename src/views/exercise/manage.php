@@ -15,12 +15,12 @@
                             <td><?= $exBuilding->getTitle() ?></td>
                             <td>
                                 <?php if (!empty($exBuilding->getFields())): ?>
-                                    <form action="<?= $data['router']->getUrl('statusAnswering', ["id" => $exBuilding->getID()])?>" method="POST" style="width:auto;display:inline-block;height:auto;padding:0;margin:0;">
+                                    <form action="<?= $data['router']->getUrl('updateState', ["id" => $exBuilding->getID(), "state" => "Answering"])?>" method="POST" class="form-hide">
                                     <button type="submit" class="btn-hidden"><i class="fa fa-comment"></i></button>
                                 </form>
                                 <?php endif; ?>
                                 <a title="Manage fields" href="<?= $data['router']->getUrl('newField', ["id" => $exBuilding->getID()]) ?>"><i class="fa fa-edit"></i></a>
-                                <form action="<?= $data['router']->getUrl('deleteExercise', ["id" => $exBuilding->getID()])?>" method="POST" style="width:auto;display:inline-block;height:auto;padding:0;margin:0;">
+                                <form action="<?= $data['router']->getUrl('deleteExercise', ["id" => $exBuilding->getID()])?>" method="POST" class="form-hide">
                                     <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
@@ -46,7 +46,9 @@
                             <td><?= $exAnswer->getTitle() ?></td>
                             <td>
                                 <a title="Show results" href="/exercises/<?= $exAnswer->getID() ?>/results"><i class="fa fa-chart-bar"></i></a>
-                                <a title="Close" rel="nofollow" data-method="put" href="/exercises/<?= $exAnswer->getID() ?>?exercise%5Bstatus%5D=closed"><i class="fa fa-minus-circle"></i></a>
+                                <form action="<?= $data['router']->getUrl('updateState', ["id" => $exAnswer->getID(), "state" => "Closed"])?>" method="POST" class="form-hide">
+                                    <button type="submit" class="btn-hidden"><i class="fa fa-minus-circle"></i></button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>

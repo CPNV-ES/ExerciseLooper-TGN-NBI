@@ -19,11 +19,12 @@ class Field extends Model
     protected $field;
     protected $exerciseId;
 
-    public function __construct($id, $title, $exerciseId)
+    public function __construct($id, $title,$field, $exerciseId)
     {
         $this->id = $id;
         $this->title = $title;
         $this->exerciseId = $exerciseId;
+        $this->field = $field;
     }
 
     public function getID()
@@ -69,6 +70,7 @@ class Field extends Model
                 new self(
                     $field['id'],
                     $field['title'],
+                    $field['field'],
                     $field['exercises_id'],
                 )
             );
@@ -83,6 +85,7 @@ class Field extends Model
             return new self(
                 $field['id'],
                 $field['title'],
+                $field['field'],
                 $field['exercises_id'],
             );
         }
