@@ -22,6 +22,9 @@ $router->get('/exercises/new', "exercise#new", "newExercise");
 $router->post('/exercises/new', "exercise#newPost", "newExercisePost");
 $router->post('/exercises/:id/delete', "exercise#delete", "deleteExercise");
 
+$router->post('/exercises/:id/statusAnswering', "exercise#updateState", "statusAnswering");
+$router->post('/exercises/:id/statusClosed', "exercise#updateState", "statusClosed");
+
 $router->get('/exercises/answering', "exercise#answering");
 
 $router->get('/exercises', "exercise#manage", "manage");
