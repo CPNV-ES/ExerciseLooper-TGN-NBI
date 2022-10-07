@@ -109,6 +109,6 @@ class Field extends Model
 
     public function destroy()
     {
-        $this->delete(self::TABLE, $this->id);
+        $this->delete(self::TABLE, ["id" => $this->id]);
     }
 }
