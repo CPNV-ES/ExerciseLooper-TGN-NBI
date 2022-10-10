@@ -74,7 +74,7 @@ class Fulfillment extends Model
         return $result;
     }
 
-    public static function create($date, $exercise)
+    public static function create($date, $exercise, $values = [])
     {
         $exerciseId = null;
         $exerciseType = gettype($exercise);
@@ -86,6 +86,9 @@ class Fulfillment extends Model
 
         if($exerciseId != null) {
             $id = self::insert(self::TABLE, 'date,exercises_id', "$date,$exerciseId");
+            for ($i = 0; $i < count($values); $i += 2) {
+                self::insert('fields_has_fulfillments', 'fields_id,fulfillments_id,value', $values[$i]['field_id'] . ",$id," . $values[$i + 1]['value']);
+            }
             return new self($id, $date, $exerciseId);
         }
     }
