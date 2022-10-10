@@ -54,8 +54,8 @@ class Field extends Model
     {
         $this->update(
             self::TABLE,
-            ['title', 'exercises_id'],
-            [$this->title, $this->exercise->getID()],
+            ['title','field', 'exercises_id'],
+            [$this->title,$this->field, $this->exerciseId],
             $this->id
         );
     }

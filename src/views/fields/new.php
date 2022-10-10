@@ -16,8 +16,9 @@
                             <td><?= $field->getTitle() ?></td>
                             <td><?= $field->getField() ?></td>
                             <td>
-                            <form action="/<?= $data['router']->getUrl('deleteField', ["id" => $data['exerciseId'], "field" => $field->getID()])?>" method="POST" class="form-hide">
-                                    <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
+                                <a title="Edit fields" href="/<?= $data['router']->getUrl('editField', ["id" => $data['exerciseId'], "field" => $field->getID()])?>"><i class="fa fa-edit"></i></a>
+                                <form action="/<?= $data['router']->getUrl('deleteField', ["id" => $data['exerciseId'], "field" => $field->getID()])?>" method="POST" class="form-hide">
+                                        <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
