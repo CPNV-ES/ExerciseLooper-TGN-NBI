@@ -44,6 +44,33 @@ class FieldController extends Controller
     {
         $field = Field::getOne($fieldId);
         $field->destroy();
-        $this->redirect('newField', ["id" => $exerciseId]);
+        $this->redirect('newField', ['id' => $exerciseId]);
+    }
+
+    public function edit($exerciseId, $fieldId)
+    {
+        $exercise = Exercise::getOne($exerciseId);
+        $field = Field::getOne($fieldId);
+        if($exercise && $field) {
+            $this->render('template.php', 'fields/edit.php', [
+                "headerColor" => "managing",
+                "headerTitle" => "Exercise : <span class='bold'>" . $exercise->getTitle() . "</span>",
+                "field" => $field,
+                "exerciseId" => $exerciseId,
+                "router" => $this->router,
+            ]);
+            return;
+        }
+        $this->render('template.php', 'errors/404.html');
+    }
+
+    public function editPost($exerciseId, $fieldId)
+    {
+        $field = Field::getOne($fieldId);
+        $newField = $_POST['field'];
+        $field->setField($newField['value_kind']);
+        $field->setTitle($newField['title']);
+        $field->sync();
+        $this->redirect('newField', ['id' => $exerciseId]);
     }
 }
