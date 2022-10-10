@@ -10,6 +10,7 @@ namespace Src\Models;
 
 use Src\Models\Model;
 use Src\Models\Field;
+use Src\Models\Fulfillment;
 
 class Exercise extends Model
 {
@@ -18,13 +19,15 @@ class Exercise extends Model
     protected $title;
     protected $state;
     protected $fields = [];
+    protected $fulfillments = [];
 
-    public function __construct($id, $title, $state, $fields = [])
+    public function __construct($id, $title, $state, $fields = [], $fulfillments = [])
     {
         $this->id = $id;
         $this->title = $title;
         $this->state = $state;
         $this->fields = $fields;
+        $this->fulfillments = $fulfillments;
     }
 
     public function getID()
@@ -57,11 +60,16 @@ class Exercise extends Model
         return $this->fields;
     }
 
+    public function getFulfillments()
+    {
+        return $this->fulfillments;
+    }
+
     public function destroy()
     {
         if ($this->state != "Answering") {
             $this->delete(self::TABLE, ["id" => $this->id]);
-        } 
+        }
     }
 
     public function sync()

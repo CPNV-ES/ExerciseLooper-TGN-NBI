@@ -69,4 +69,13 @@ class ExerciseController extends Controller
         $newExercise = Exercise::create($exercise['title']);
         $this->redirect('newField', ["id" => $newExercise->getID()]);
     }
+
+    public function results()
+    {
+        $this->render('template.php', 'exercise/results.php', [
+            "router" => $this->router,
+            "headerColor" => "results",
+            "fulfillments" => []
+        ]);
+    }
 }

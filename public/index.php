@@ -38,4 +38,6 @@ $router->get('/exercises/answering', "exercise#answering");
 
 $router->get('/exercises', "exercise#manage", "manage");
 
+$router->get('/exercises/:id/results', "exercise#results", "results");
+
 $router->run();
