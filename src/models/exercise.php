@@ -59,7 +59,9 @@ class Exercise extends Model
 
     public function destroy()
     {
-        $this->delete(self::TABLE, ["id" => $this->id]);
+        if ($this->state != "Answering") {
+            $this->delete(self::TABLE, ["id" => $this->id]);
+        } 
     }
 
     public function sync()

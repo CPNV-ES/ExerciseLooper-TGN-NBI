@@ -72,7 +72,9 @@
                             <td><?= $exClosed->getTitle() ?></td>
                             <td>
                                 <a title="Show results" href="/exercises/<?= $exClosed->getID() ?>/results"><i class="fa fa-chart-bar"></i></a>
-                                <a data-confirm="Are you sure?" title="Destroy" rel="nofollow" data-method="delete" href=""><i class="fa fa-trash"></i></a>
+                                <form action="<?= $data['router']->getUrl('deleteExercise', ["id" => $exClosed->getID()])?>" method="POST" class="form-hide">
+                                    <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
+                                </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
