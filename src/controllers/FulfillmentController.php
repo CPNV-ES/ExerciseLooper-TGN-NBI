@@ -27,9 +27,25 @@ class FulfillmentController extends Controller
         }
         $this->render('template.php', 'errors/404.html');
     }
-    public function newPost($exerciseId) {
+
+    public function newPost($exerciseId) 
+    {
         $fulfillmentsPost = $_POST['fulfillment']['answers_attributes'];
-        Fulfillment::create(date("Y-m-d h:m:s"), $exerciseId, $fulfillmentsPost);
-        $this->redirect('newFulfillment', ['id' => $exerciseId]);
+        $newFulfillment = Fulfillment::create(date("Y-m-d h:m:s"), $exerciseId, $fulfillmentsPost);
+        $this->redirect('editFulfillment', ['id' => $exerciseId, 'fulfillment' => $newFulfillment->getId()]);
+    }
+
+    public function edit($exerciseId, $fulfillmentId) 
+    {
+        $fulfillment = Fulfillment::getOne($fulfillmentId);
+        $exercise = Exercise::getOne($exerciseId);
+       if ($exercise && $fulfillment) {
+            $this->render('template.php', 'fulfillments/new.php',[
+                "exercise" => $exercise,
+                "formNewFulfillmentURL" => $this->router->getUrl('editFulfillmentPost', ['id' => $exerciseId, 'fulfillment' => $fulfillmentId])
+            ]);
+            return;
+        }
+        $this->render('template.php', 'errors/404.html');
     }
 }
