@@ -19,15 +19,13 @@ class Exercise extends Model
     protected $title;
     protected $state;
     protected $fields = [];
-    protected $fulfillments = [];
 
-    public function __construct($id, $title, $state, $fields = [], $fulfillments = [])
+    public function __construct($id, $title, $state, $fields = [])
     {
         $this->id = $id;
         $this->title = $title;
         $this->state = $state;
         $this->fields = $fields;
-        $this->fulfillments = $fulfillments;
     }
 
     public function getID()
@@ -58,11 +56,6 @@ class Exercise extends Model
     public function getFields()
     {
         return $this->fields;
-    }
-
-    public function getFulfillments()
-    {
-        return $this->fulfillments;
     }
 
     public function destroy()

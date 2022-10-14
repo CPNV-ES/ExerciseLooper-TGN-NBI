@@ -61,13 +61,13 @@ class Fulfillment extends Model
         }
     }
 
-    public function getFulfillmentsValues() 
+    public function getFulfillmentsValues()
     {
         $result = [];
-        $fulfillmentsValues = self::select("fields_has_fulfillments", "*", ["fulfillments_id" => $this->id])[0];
+        $fulfillmentsValues = self::select("fields_has_fulfillments", "*", ["fulfillments_id" => $this->id]);
         foreach($fulfillmentsValues as $value) {
             array_push($result, [
-                "field" => Field::getOne($value['field_id']),
+                "field" =>  Field::getOne($value['fields_id']),
                 "value" => $value['value']
             ]);
         }

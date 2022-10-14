@@ -45,7 +45,9 @@
                         <tr>
                             <td><?= $exAnswer->getTitle() ?></td>
                             <td>
-                                <a title="Show results" href="/exercises/<?= $exAnswer->getID() ?>/results"><i class="fa fa-chart-bar"></i></a>
+                                <form action="<?= $data['router']->getUrl('results', ["id" => $exAnswer->getID()])?>" method="POST" class="form-hide">
+                                    <button type="submit" class="btn-hidden"><i class="fa fa-chart-bar"></i></button>
+                                </form>
                                 <form action="<?= $data['router']->getUrl('updateState', ["id" => $exAnswer->getID(), "state" => "Closed"])?>" method="POST" class="form-hide">
                                     <button type="submit" class="btn-hidden"><i class="fa fa-minus-circle"></i></button>
                                 </form>

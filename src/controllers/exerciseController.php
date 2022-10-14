@@ -10,6 +10,8 @@ namespace Src\Controllers;
 
 use Src\Controllers\Controller;
 use Src\Models\Exercise;
+use Src\Models\Fulfillment;
+use Src\Models\Field;
 
 class ExerciseController extends Controller
 {
@@ -70,12 +72,17 @@ class ExerciseController extends Controller
         $this->redirect('newField', ["id" => $newExercise->getID()]);
     }
 
-    public function results()
+    public function results($id)
     {
+        $fulfillments = Fulfillment::getAll(["exercises_id" => $id]);
+        $fields = Field::getAll(["exercises_id" => $id]);
+        $exercise = Exercise::getOne($id);
         $this->render('template.php', 'exercise/results.php', [
             "router" => $this->router,
             "headerColor" => "results",
-            "fulfillments" => []
+            "headerTitle" => "Exercise: <a href=''>" . $exercise->getTitle() . "</a>",
+            "fulfillments" => $fulfillments,
+            "fields" => $fields
         ]);
     }
 }
