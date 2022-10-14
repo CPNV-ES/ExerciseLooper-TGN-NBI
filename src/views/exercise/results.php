@@ -14,12 +14,12 @@
             <tbody>
                 <?php foreach ($data['fulfillments'] as $fulfillment) : ?>
                     <tr>
-                        <td><a href="#"><?= $fulfillment->getDate() ?> UTC</a></td>
+                        <td><a href="/<?= $data['router']->getUrl('fulfillmentResults', ["id" => $data['exerciseId'], "fulfillment" => $fulfillment->getID()]) ?>"><?= $fulfillment->getDate() ?> UTC</a></td>
                         <?php foreach ($fulfillment->getFulfillmentsValues() as $response) : ?>
                             <td class="answer">
                                 <?php if (strlen($response['value']) == 0) : ?>
                                     <i class="fa fa-times empty"></i>
-                                <?php elseif (strlen($response['value']) >= 10) : ?>
+                                <?php elseif (strlen($response['value']) < 10) : ?>
                                     <i class="fa fa-check short"></i>
                                 <?php else : ?>
                                     <i class="fa fa-check-double filled"></i>

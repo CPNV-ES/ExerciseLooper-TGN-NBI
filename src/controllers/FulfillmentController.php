@@ -48,4 +48,18 @@ class FulfillmentController extends Controller
         }
         $this->render('template.php', 'errors/404.html');
     }
+
+    public function results($exerciseId, $fulfillmentId)
+    {
+        $fulfillment = Fulfillment::getOne($fulfillmentId);
+        $fields = Field::getAll(["exercises_id" => $exerciseId]);
+        $exercise = Exercise::getOne($exerciseId);
+        $this->render('template.php', 'fulfillments/results.php', [
+            "router" => $this->router,
+            "headerColor" => "results",
+            "headerTitle" => "Exercise: <a href=''>" . $exercise->getTitle() . "</a>",
+            "fulfillment" => $fulfillment,
+            "fields" => $fields
+        ]);
+    }
 }

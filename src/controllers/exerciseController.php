@@ -82,7 +82,8 @@ class ExerciseController extends Controller
             "headerColor" => "results",
             "headerTitle" => "Exercise: <a href=''>" . $exercise->getTitle() . "</a>",
             "fulfillments" => $fulfillments,
-            "fields" => $fields
+            "fields" => $fields,
+            "exerciseId" => $exercise->getID()
         ]);
     }
 }
