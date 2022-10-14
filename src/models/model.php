@@ -21,7 +21,7 @@ class Model
         $statement = self::$connection->prepare($query);
 
         foreach($where as $key => $value) {
-            $statement->bindParam(":$key",$value);
+            $statement->bindParam(":".trim($key),trim($value));
         }
 
         if ($statement->execute()) {
@@ -36,9 +36,9 @@ class Model
         if (!empty($where)) {
             $strWhere = "WHERE ";
             foreach ($where as $key => $value) {
-                    $strWhere .= "$key = :$key,";
+                    $strWhere .= "$key = :$key and ";
             }
-            $strWhere = substr($strWhere, 0 , -1);
+            $strWhere = substr($strWhere, 0 , -5);
             return $strWhere;
         }
         return "";
@@ -58,14 +58,14 @@ class Model
         $statement = self::$connection->prepare($query);
 
         for ($i = 0; $i < count($splitedValues); $i++) {
-            $statement->bindParam($bindedFields[$i], $splitedValues[$i]);
+            $statement->bindParam(trim($bindedFields[$i]), trim($splitedValues[$i]));
         }
 
         $statement->execute();
         return self::$connection->lastInsertId();
     }
 
-    public function update($table, $fields, $values, $id)
+    public function update($table, $fields, $values, $where)
     {
         $strValues = "";
         for ($i = 0; $i < count($fields); $i++) {
@@ -75,13 +75,30 @@ class Model
                 $strValues .= ",";
             }
         }
-        $query = "UPDATE $table SET $strValues WHERE id = :id";
-        $statement = self::$connection->prepare($query);
-        for ($i = 0; $i < count($values); $i++) {
-            $statement->bindParam(":" . $fields[$i], $values[$i]);
+        $whereType = gettype($where);
+
+        if($whereType == 'integer' || $whereType == 'string') {
+            $query = "UPDATE $table SET $strValues WHERE id = :id";
+            $statement = self::$connection->prepare($query);
+            for ($i = 0; $i < count($values); $i++) {
+                $statement->bindParam(":" . $fields[$i], $values[$i]);
+            }
+            $statement->bindParam(":id", $where);
+            $statement->execute();
+        } else {
+            $strWhere = self::generateWhere($where);
+            $query = "UPDATE $table SET $strValues $strWhere";
+            $statement = self::$connection->prepare($query);
+
+            for ($i = 0; $i < count($values); $i++) {
+                $statement->bindParam(":$fields[$i]", $values[$i]);
+            }
+            foreach($where as $key => $value) {
+                $statement->bindParam(":".trim($key),trim($value));
+            }
+            $statement->execute();
         }
-        $statement->bindParam(":id", $id);
-        $statement->execute();
+
     }
 
     public function delete($table, $where)

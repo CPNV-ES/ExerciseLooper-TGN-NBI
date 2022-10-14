@@ -61,7 +61,7 @@ class Fulfillment extends Model
         }
     }
 
-    public function getFulfillmentsValues()
+    public function getFieldsValues()
     {
         $result = [];
         $fulfillmentsValues = self::select("fields_has_fulfillments", "*", ["fulfillments_id" => $this->id]);
@@ -72,6 +72,12 @@ class Fulfillment extends Model
             ]);
         }
         return $result;
+    }
+
+    public function updateFieldsValues($values = []) {
+        for ($i = 0; $i < count($values); $i += 2) {
+            self::update('fields_has_fulfillments', ['value'],[$values[$i + 1]['value']], ["fields_id" => (int) $values[$i]['field_id'], "fulfillments_id" => $this->id]);
+        }
     }
 
     public static function create($date, $exercise, $values = [])
@@ -92,6 +98,7 @@ class Fulfillment extends Model
             return new self($id, $date, $exerciseId);
         }
     }
+
 
     public function destroy()
     {
