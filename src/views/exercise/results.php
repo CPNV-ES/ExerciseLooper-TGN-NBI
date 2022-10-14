@@ -15,7 +15,7 @@
                 <?php foreach ($data['fulfillments'] as $fulfillment) : ?>
                     <tr>
                         <td><a href="#"><?= $fulfillment->getDate() ?> UTC</a></td>
-                        <?php foreach ($fulfillment->getFulfillmentsValues() as $response) : ?>
+                        <?php foreach ($fulfillment->getFieldsValues() as $response) : ?>
                             <td class="answer">
                                 <?php if (strlen($response['value']) == 0) : ?>
                                     <i class="fa fa-times empty"></i>

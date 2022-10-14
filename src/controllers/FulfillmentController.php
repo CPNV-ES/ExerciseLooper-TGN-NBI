@@ -39,13 +39,24 @@ class FulfillmentController extends Controller
     {
         $fulfillment = Fulfillment::getOne($fulfillmentId);
         $exercise = Exercise::getOne($exerciseId);
-       if ($exercise && $fulfillment) {
-            $this->render('template.php', 'fulfillments/new.php',[
+        if ($exercise && $fulfillment) {
+            $this->render('template.php', 'fulfillments/edit.php',[
+                "values" => $fulfillment->getFieldsValues(),
                 "exercise" => $exercise,
-                "formNewFulfillmentURL" => $this->router->getUrl('editFulfillmentPost', ['id' => $exerciseId, 'fulfillment' => $fulfillmentId])
+                "formEditFulfillmentURL" => $this->router->getUrl('editFulfillmentPost', ['id' => $exerciseId, 'fulfillment' => $fulfillmentId])
             ]);
             return;
         }
         $this->render('template.php', 'errors/404.html');
+    }
+
+    public function editPost($exerciseId, $fulfillmentId)
+    {
+        $fulfillment = Fulfillment::getOne($fulfillmentId);
+        if($fulfillment) {
+            $fulfillmentsPost = $_POST['fulfillment']['answers_attributes'];
+            $fulfillment->updateFieldsValues($fulfillmentsPost);
+        }
+        $this->redirect('editFulfillment', ['id' => $exerciseId, 'fulfillment' => $fulfillmentId]);
     }
 }
