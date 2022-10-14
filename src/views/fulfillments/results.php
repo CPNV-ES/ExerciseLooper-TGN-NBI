@@ -3,7 +3,7 @@
     <body>
         <h1><?= $data['fulfillment']->getDate() ?></h1>
         <dl class="answer">
-            <?php foreach ($data['fulfillment']->getFulfillmentsValues() as $value) : ?>
+            <?php foreach ($data['fulfillment']->getFieldsValues() as $value) : ?>
                 <dt><?= $value['field']->getTitle() ?></dt>
                 <dd><?= $value['value'] ?></dd>
             <?php endforeach; ?>
