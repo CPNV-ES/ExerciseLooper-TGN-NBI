@@ -43,6 +43,7 @@ class FulfillmentController extends Controller
             $this->render('template.php', 'fulfillments/edit.php',[
                 "values" => $fulfillment->getFieldsValues(),
                 "exercise" => $exercise,
+                "headerTitle" => "Exercise: <span class='bold'>" . $exercise->getTitle() . "</span>",
                 "formEditFulfillmentURL" => $this->router->getUrl('editFulfillmentPost', ['id' => $exerciseId, 'fulfillment' => $fulfillmentId])
             ]);
             return;
@@ -58,9 +59,24 @@ class FulfillmentController extends Controller
         $this->render('template.php', 'fulfillments/results.php', [
             "router" => $this->router,
             "headerColor" => "results",
-            "headerTitle" => "Exercise: <a href=''>" . $exercise->getTitle() . "</a>",
+            "headerTitle" => "Exercise: <a href='/". $this->router->getUrl('results', ['id' => $exerciseId]) ."'>" . $exercise->getTitle() . "</a>",
             "fulfillment" => $fulfillment,
             "fields" => $fields
+        ]);
+    }
+
+    public function result($exerciseId, $fieldId)
+    {
+        $field = Field::getOne($fieldId);
+        $fulfillments = Fulfillment::getAll(['exercises_id' => $exerciseId]);
+        $exercise = Exercise::getOne($exerciseId);
+        $this->render('template.php', 'fulfillments/result.php', [
+            "router" => $this->router,
+            "headerColor" => "results",
+            "headerTitle" => "Exercise: <a href='/". $this->router->getUrl('results', ['id' => $exerciseId]) ."'>" . $exercise->getTitle() . "</a>",
+            "fulfillments" => $fulfillments,
+            "exerciseId" => $exercise->getID(),
+            "field" => $field
         ]);
     }
     

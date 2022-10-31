@@ -4,7 +4,7 @@
     <form action="/<?= $data['router']->getUrl('editFieldPost', ["id" => $data['exerciseId'], "field" => $data['field']->getID()])?>" accept-charset="UTF-8" method="post">
         <input name="utf8" type="hidden" value="✓">
         <div class="field">
-            <label for="field_title">Title</label>
+            <label for="field_title">Label</label>
             <input type="text" value="<?= $data['field']->getTitle() ?>" name="field[title]" id="field_title">
         </div>
 

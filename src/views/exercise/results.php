@@ -6,7 +6,7 @@
                 <tr>
                     <th>Take</th>
                     <?php foreach ($data['fields'] as $field) : ?>
-                        <th><a href="#"><?= $field->getTitle() ?></a></th>
+                        <th><a href="/<?= $data['router']->getUrl('fulfillmentResult', ["id" => $data['exerciseId'], "field" => $field->getID()]) ?>"><?= $field->getTitle() ?></a></th>
                     <?php endforeach; ?>
                 </tr>
             </thead>

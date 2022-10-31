@@ -54,7 +54,7 @@ class FieldController extends Controller
         if($exercise && $field) {
             $this->render('template.php', 'fields/edit.php', [
                 "headerColor" => "managing",
-                "headerTitle" => "Exercise : <span class='bold'>" . $exercise->getTitle() . "</span>",
+                "headerTitle" => "Exercise : <a href='' class='bold'>" . $exercise->getTitle() . "</a>",
                 "field" => $field,
                 "exerciseId" => $exerciseId,
                 "router" => $this->router,

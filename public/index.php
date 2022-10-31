@@ -50,6 +50,8 @@ $router->get('/exercises', "exercise#manage", "manage");
 
 $router->get('/exercises/:id/results', "exercise#results", "results");
 
+$router->get('/exercises/:id/results/:field', "fulfillment#result", "fulfillmentResult");
+
 $router->get('/exercises/:id/fulfillments/:fulfillment', "fulfillment#results", "fulfillmentResults");
 
 $router->run();
