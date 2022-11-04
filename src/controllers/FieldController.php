@@ -21,11 +21,14 @@ class FieldController extends Controller
             $fields = $exercise->getFields();
             $this->render('template.php', 'fields/new.php', [
                 "headerColor" => "managing",
-                "headerTitle" => "Exercise : <span class='bold'>" . $exercise->getTitle() . "</span>",
+                "headerTitle" => [
+                    "beforeLink" => "Exercise: ",
+                    "link" => "",
+                    "afterLink" => $exercise->getTitle() ,
+                ],
                 "formNewFieldURL" => $formNewFieldURL,
                 "exerciseId" => $id,
                 "fields" => $fields,
-                "router" => $this->router
             ]);
             return;
         }
@@ -36,7 +39,7 @@ class FieldController extends Controller
     {
         $field = $_POST['field'];
         $exerciseId = $field['exerciseId'];
-        $newField = Field::create($field['title'],$field['field'], $exerciseId);
+        Field::create($field['title'],$field['field'], $exerciseId);
         $this->redirect('newField', ["id" => $exerciseId]);
     }
 
@@ -54,10 +57,13 @@ class FieldController extends Controller
         if($exercise && $field) {
             $this->render('template.php', 'fields/edit.php', [
                 "headerColor" => "managing",
-                "headerTitle" => "Exercise : <a href='' class='bold'>" . $exercise->getTitle() . "</a>",
+                "headerTitle" => [
+                    "beforeLink" => "Exercise: ",
+                    "link" => "",
+                    "afterLink" => $exercise->getTitle() ,
+                ],
                 "field" => $field,
                 "exerciseId" => $exerciseId,
-                "router" => $this->router,
             ]);
             return;
         }

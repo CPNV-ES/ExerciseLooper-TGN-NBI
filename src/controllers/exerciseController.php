@@ -25,7 +25,8 @@ class ExerciseController extends Controller
         ]);
     }
 
-    public function delete($id) {
+    public function delete($id) 
+    {
         $exercise = Exercise::getOne($id);
         $exercise->destroy();
         $this->redirect('manage');
@@ -47,7 +48,6 @@ class ExerciseController extends Controller
         $this->render('template.php', 'exercise/answering.php', [
             "headerColor" => "answering",
             "exercises" => $exercises,
-            "router" => $this->router,
         ]);
     }
 
@@ -57,7 +57,6 @@ class ExerciseController extends Controller
         $exercisesAnswering = Exercise::getAll(["state" => 'Answering']);
         $exercisesClosed = Exercise::getAll(["state" => 'Closed']);
         $this->render('template.php', 'exercise/manage.php', [
-            "router" => $this->router,
             "headerColor" => "results",
             "exercisesBuilding" => $exercisesBuilding,
             "exercisesAnswering" => $exercisesAnswering,
@@ -78,9 +77,12 @@ class ExerciseController extends Controller
         $fields = Field::getAll(["exercises_id" => $id]);
         $exercise = Exercise::getOne($id);
         $this->render('template.php', 'exercise/results.php', [
-            "router" => $this->router,
             "headerColor" => "results",
-            "headerTitle" => "Exercise: <a href=''>" . $exercise->getTitle() . "</a>",
+            "headerTitle" => [
+                "beforeLink" => "Exercise: ",
+                "link" => "",
+                "afterLink" => $exercise->getTitle() ,
+            ],
             "fulfillments" => $fulfillments,
             "fields" => $fields,
             "exerciseId" => $exercise->getID()

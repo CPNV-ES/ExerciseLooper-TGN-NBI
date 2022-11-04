@@ -17,6 +17,7 @@ class Controller
 
     public function render($template, $content, $data = [])
     {
+        $data["router"] = $this->router;
         return Renderer::render($template, $content, $data);
     }
 
