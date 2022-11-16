@@ -18,4 +18,5 @@
 
 #### Procédure
 1. Récuperer le repository depuis Github (clone, fork ou téléchargement .zip) (https://github.com/CPNV-ES/ExerciseLooper-TGN-NBI)
+1. Faire un ``` composer install ``` à la racine du projet
 1. 
