@@ -62,7 +62,7 @@ class Route
     {
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
-            require(SOURCE_DIR . '\/controllers\/' . $params[0] . 'Controller.php');
+            require(SOURCE_DIR . '/controllers/' . $params[0] . 'Controller.php');
 
             $controller = "Src\\Controllers\\" . $params[0] . "Controller";
             $controller = new $controller();
