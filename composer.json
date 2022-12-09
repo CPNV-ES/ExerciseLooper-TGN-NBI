@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src",
+            "Src\\Controllers\\": "src/controllers",
+            "Src\\Models\\": "src/models",
+            "Src\\Renderer\\": "src/renderer",
+            "Src\\Router\\": "src/router"
+        }
+    }
+}
