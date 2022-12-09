@@ -19,7 +19,7 @@ class FulfillmentController extends Controller
     {
         $exercise = Exercise::getOne($exerciseId);
         if ($exercise) {
-            $this->render('template.php', 'fulfillments/new.php',[
+            $this->render('template.php', 'fulfillments/new.php', [
                 "exercise" => $exercise,
                 "formNewFulfillmentURL" => $this->router->getUrl('newFulfillmentPost', ['id' => $exerciseId])
             ]);
@@ -28,25 +28,25 @@ class FulfillmentController extends Controller
         $this->render('template.php', 'errors/404.html');
     }
 
-    public function newPost($exerciseId) 
+    public function newPost($exerciseId)
     {
         $fulfillmentsPost = $_POST['fulfillment']['answers_attributes'];
         $newFulfillment = Fulfillment::create(date("Y-m-d h:m:s"), $exerciseId, $fulfillmentsPost);
         $this->redirect('editFulfillment', ['id' => $exerciseId, 'fulfillment' => $newFulfillment->getId()]);
     }
 
-    public function edit($exerciseId, $fulfillmentId) 
+    public function edit($exerciseId, $fulfillmentId)
     {
         $fulfillment = Fulfillment::getOne($fulfillmentId);
         $exercise = Exercise::getOne($exerciseId);
         if ($exercise && $fulfillment) {
-            $this->render('template.php', 'fulfillments/edit.php',[
+            $this->render('template.php', 'fulfillments/edit.php', [
                 "values" => $fulfillment->getFieldsValues(),
                 "exercise" => $exercise,
                 "headerTitle" => [
                     "beforeLink" => "Exercise: ",
                     "link" => "",
-                    "afterLink" => $exercise->getTitle() ,
+                    "afterLink" => $exercise->getTitle(),
                 ],
                 "formEditFulfillmentURL" => $this->router->getUrl('editFulfillmentPost', ['id' => $exerciseId, 'fulfillment' => $fulfillmentId])
             ]);
@@ -64,8 +64,8 @@ class FulfillmentController extends Controller
             "headerColor" => "results",
             "headerTitle" => [
                 "beforeLink" => "Exercise: ",
-                "link" => "/". $this->router->getUrl('results', ['id' => $exerciseId]),
-                "afterLink" => $exercise->getTitle() ,
+                "link" => "/" . $this->router->getUrl('results', ['id' => $exerciseId]),
+                "afterLink" => $exercise->getTitle(),
             ],
             "fulfillment" => $fulfillment,
             "fields" => $fields
@@ -81,19 +81,19 @@ class FulfillmentController extends Controller
             "headerColor" => "results",
             "headerTitle" => [
                 "beforeLink" => "Exercise: ",
-                "link" => "/". $this->router->getUrl('results', ['id' => $exerciseId]),
-                "afterLink" => $exercise->getTitle() ,
+                "link" => "/" . $this->router->getUrl('results', ['id' => $exerciseId]),
+                "afterLink" => $exercise->getTitle(),
             ],
             "fulfillments" => $fulfillments,
             "exerciseId" => $exercise->getID(),
             "field" => $field
         ]);
     }
-    
+
     public function editPost($exerciseId, $fulfillmentId)
     {
         $fulfillment = Fulfillment::getOne($fulfillmentId);
-        if($fulfillment) {
+        if ($fulfillment) {
             $fulfillmentsPost = $_POST['fulfillment']['answers_attributes'];
             $fulfillment->updateFieldsValues($fulfillmentsPost);
         }
