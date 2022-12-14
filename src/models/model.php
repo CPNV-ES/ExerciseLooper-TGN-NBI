@@ -20,8 +20,8 @@ class Model
         $query = "SELECT $fields FROM $table $strWhere";
         $statement = self::$connection->prepare($query);
 
-        foreach($where as $key => $value) {
-            $statement->bindParam(":".trim($key),trim($value));
+        foreach ($where as $key => $value) {
+            $statement->bindParam(":" . trim($key), trim($value));
         }
 
         if ($statement->execute()) {
@@ -32,19 +32,19 @@ class Model
         }
     }
 
-    private static function generateWhere($where) {
+    private static function generateWhere($where)
+    {
         if (!empty($where)) {
             $strWhere = "WHERE ";
             foreach ($where as $key => $value) {
-                    $strWhere .= "$key = :$key and ";
+                $strWhere .= "$key = :$key and ";
             }
-            $strWhere = substr($strWhere, 0 , -5);
+            $strWhere = substr($strWhere, 0, -5);
             return $strWhere;
         }
         return "";
-    } 
+    }
 
-    /* /!\ CODE TO REFACTOR ! */
     public static function insert($table, $fields, $values)
     {
         $splitedValues = explode(',', $values);
@@ -77,7 +77,7 @@ class Model
         }
         $whereType = gettype($where);
 
-        if($whereType == 'integer' || $whereType == 'string') {
+        if ($whereType == 'integer' || $whereType == 'string') {
             $query = "UPDATE $table SET $strValues WHERE id = :id";
             $statement = self::$connection->prepare($query);
             for ($i = 0; $i < count($values); $i++) {
@@ -93,12 +93,11 @@ class Model
             for ($i = 0; $i < count($values); $i++) {
                 $statement->bindParam(":$fields[$i]", $values[$i]);
             }
-            foreach($where as $key => $value) {
-                $statement->bindParam(":".trim($key),trim($value));
+            foreach ($where as $key => $value) {
+                $statement->bindParam(":" . trim($key), trim($value));
             }
             $statement->execute();
         }
-
     }
 
     public function delete($table, $where)
@@ -106,8 +105,8 @@ class Model
         $strWhere = self::generateWhere($where);
         $query = "DELETE FROM $table $strWhere";
         $statement = self::$connection->prepare($query);
-        foreach($where as $key => $value) {
-            $statement->bindParam(":$key",$value);
+        foreach ($where as $key => $value) {
+            $statement->bindParam(":$key", $value);
         }
         $statement->execute();
     }
