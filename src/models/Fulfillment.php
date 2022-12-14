@@ -9,7 +9,7 @@
 namespace Src\Models;
 
 class Fulfillment extends Model
-{   
+{
     const TABLE = "fulfillments";
     protected $id;
     protected $date;
@@ -35,7 +35,7 @@ class Fulfillment extends Model
     public static function getAll($where = "")
     {
         $result = [];
-        $fulfillments = self::select("fulfillments", "*", $where);
+        $fulfillments = self::select(self::TABLE, "*", $where);
         foreach ($fulfillments as $fulfillment) {
             array_push(
                 $result,
@@ -51,7 +51,7 @@ class Fulfillment extends Model
 
     public static function getOne($id)
     {
-        $fulfillment = self::select("fulfillments", "*", ["id" => $id])[0];
+        $fulfillment = self::select(self::TABLE, "*", ["id" => $id])[0];
         if ($fulfillment) {
             return new self(
                 $fulfillment['id'],
@@ -65,7 +65,7 @@ class Fulfillment extends Model
     {
         $result = [];
         $fulfillmentsValues = self::select("fields_has_fulfillments", "*", ["fulfillments_id" => $this->id]);
-        foreach($fulfillmentsValues as $value) {
+        foreach ($fulfillmentsValues as $value) {
             array_push($result, [
                 "field" =>  Field::getOne($value['fields_id']),
                 "value" => $value['value']
@@ -74,9 +74,10 @@ class Fulfillment extends Model
         return $result;
     }
 
-    public function updateFieldsValues($values = []) {
+    public function updateFieldsValues($values = [])
+    {
         for ($i = 0; $i < count($values); $i += 2) {
-            self::update('fields_has_fulfillments', ['value'],[$values[$i + 1]['value']], ["fields_id" => (int) $values[$i]['field_id'], "fulfillments_id" => $this->id]);
+            self::update('fields_has_fulfillments', ['value'], [$values[$i + 1]['value']], ["fields_id" => (int) $values[$i]['field_id'], "fulfillments_id" => $this->id]);
         }
     }
 
@@ -84,13 +85,13 @@ class Fulfillment extends Model
     {
         $exerciseId = null;
         $exerciseType = gettype($exercise);
-        if($exerciseType == "integer" || $exerciseType == "string") {
+        if ($exerciseType == "integer" || $exerciseType == "string") {
             $exerciseId = $exercise;
         } else {
             $exerciseId = $exercise->getID();
         }
 
-        if($exerciseId != null) {
+        if ($exerciseId != null) {
             $id = self::insert(self::TABLE, 'date,exercises_id', "$date,$exerciseId");
             for ($i = 0; $i < count($values); $i += 2) {
                 self::insert('fields_has_fulfillments', 'fields_id,fulfillments_id,value', $values[$i]['field_id'] . ",$id," . $values[$i + 1]['value']);
