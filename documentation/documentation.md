@@ -1,10 +1,10 @@
 # Documentation ExerciseLooper - Semi-Croustillants
 
 ## Modèle Conceptuel
-![MCD_ExerciseLooper](https://user-images.githubusercontent.com/47849503/207560154-19ad11b4-8716-4a28-a6db-0a3b472a9148.png)
+![MCD_ExerciseLooper](images/MCD_ExerciseLooper.png)
 
 ## Modèle Logique
-![MLD_ExerciseLooper](https://user-images.githubusercontent.com/47849503/207560193-a3d4abe4-c1be-4867-bcaf-06bbb8b9cbf5.png)
+![MLD_ExerciseLooper](images/MLD_ExerciseLooper.png)
 
 ## Mise en place environement
 
