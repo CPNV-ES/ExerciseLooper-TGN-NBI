@@ -19,18 +19,12 @@ class Renderer
      */
     public static function render($template, $content, $data = [])
     {
-        // Check if a template was specified
         if ($template) {
-            // Start output buffering to capture the content view
             ob_start();
-            // Include the content view
             include(SOURCE_DIR . "/views/$content");
-            // Get the contents of the output buffer and clean it
             $content = ob_get_clean();
-            // Include the template with the content view inside
             include(SOURCE_DIR . "/views/templates/$template");
         } else {
-            // No template was specified, just include the content view
             include(SOURCE_DIR . "/views/$content");
         }
     }

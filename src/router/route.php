@@ -37,19 +37,14 @@ class Route
      */
     public function match($url)
     {
-        // Trim leading and trailing slashes from URL
         $url = trim($url, '/');
-        // Replace parameters in the path with regular expressions
         $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->path);
-        // Create a regular expression for matching the URL
         $regex = "#^$path$#i";
-        // Check if the URL matches the regular expression
         if (!preg_match($regex, $url, $matches)) {
             return false;
         }
-        // Remove the full match from the array of matches
+
         array_shift($matches);
-        // Save the matches in the object
         $this->matches = $matches;
         return true;
     }
@@ -63,12 +58,10 @@ class Route
      */
     private function paramMatch($match)
     {
-        // Check if a custom regular expression has been set for the parameter
         if (isset($this->params[$match[1]])) {
-            // Return the custom regular expression
             return '(' . $this->params[$match[1]] . ')';
         }
-        // Return a default regular expression for matching any character except a slash
+
         return '([^/]+)';
     }
 
@@ -81,9 +74,8 @@ class Route
      */
     public function getUrl($params)
     {
-        // Start with the route's path
         $path = $this->path;
-        // Substitute each parameter in the path
+
         foreach ($params as $key => $value) {
             $path = str_replace(":$key", $value, $path);
         }
@@ -100,9 +92,7 @@ class Route
      */
     public function with($param, $regex)
     {
-        // Add the regular expression for the parameter to the params array
         $this->params[$param] = str_replace('(', '(?:', $regex);
-        // Return this object for method chaining
         return $this;
     }
     /**
@@ -114,18 +104,14 @@ class Route
     {
         // Check if the callable is a string or a function
         if (is_string($this->callable)) {
-            // Split the string into the controller name and method
             $params = explode('#', $this->callable);
-            // Load the controller file
             require(SOURCE_DIR . '/controllers/' . $params[0] . 'Controller.php');
-            // Create a fully qualified class name for the controller
             $controller = "Src\\Controllers\\" . $params[0] . "Controller";
-            // Create a new instance of the controller
             $controller = new $controller();
-            // Call the specified method on the controller, passing in the matches from the URL
+
             return call_user_func_array([$controller, $params[1]], $this->matches);
         } else {
-            // Call the function, passing in the matches from the URL
+
             return call_user_func_array($this->callable, $this->matches);
         }
     }

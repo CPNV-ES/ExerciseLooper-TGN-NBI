@@ -20,7 +20,6 @@ class Controller
      */
     public function __construct()
     {
-        // Get the Router singleton instance and pass in the current request URL
         $this->router = Router::getInstance($_SERVER['REQUEST_URI']);
     }
 
@@ -35,9 +34,7 @@ class Controller
      */
     public function render($template, $content, $data = [])
     {
-        // Add the Router object to the data array
         $data["router"] = $this->router;
-        // Render the view using the specified template and content, and pass in the data array
         return Renderer::render($template, $content, $data);
     }
 
@@ -49,14 +46,10 @@ class Controller
      */
     public function redirect($route, $params = [])
     {
-        // Check if the route is a full URL or just a route name
         if (strpos($route, "/")) {
-            // Route is a full URL, redirect to it
             header('Location:' . $route);
         } else {
-            // Route is a named route, get the URL for it
             $namedRoute = $this->router->getUrl($route, $params);
-            // Redirect to the named route URL
             header('Location:/' . $namedRoute);
         }
     }

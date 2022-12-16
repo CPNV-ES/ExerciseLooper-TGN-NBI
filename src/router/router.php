@@ -65,19 +65,14 @@ class Router
      */
     private function add($path, $callable, $name, $method)
     {
-        // create a new Route object
         $route = new Route($path, $callable);
-        // add the Route to the list of routes for the specified HTTP method
         $this->routes[$method][] = $route;
-        // if the callable is a string and no name was provided, use the callable as the name
         if (is_string($callable) && $name === null) {
             $name = $callable;
         }
-        // if a name was provided, add the Route to the list of named routes
         if ($name) {
             $this->namedRoutes[$name] = $route;
         }
-        // return the Route object
         return $route;
     }
 
@@ -86,17 +81,15 @@ class Router
      */
     public function run()
     {
-        // check if there are any routes for the current HTTP method
         if (isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
+
             // loop through the routes for the current HTTP method
             foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
-                // if the route matches the current URL, call the route's callable
                 if ($route->match($this->url)) {
                     return $route->call();
                 }
             }
         }
-        // if no matching route was found, render the 404 error page
         Renderer::render('template.php', 'errors/404.html');
     }
 
@@ -109,11 +102,9 @@ class Router
      */
     public function getUrl($name, $params = [])
     {
-        // if the named route does not exist, return null
         if (!isset($this->namedRoutes[$name])) {
             return null;
         }
-        // get the URL for the named route and return it
         return $this->namedRoutes[$name]->getUrl($params);
     }
 
