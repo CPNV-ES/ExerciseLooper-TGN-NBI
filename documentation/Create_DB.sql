@@ -36,6 +36,7 @@ DROP TABLE IF EXISTS `exerciseLooper`.`fields` ;
 CREATE TABLE IF NOT EXISTS `exerciseLooper`.`fields` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(50) NULL,
+  `field` VARCHAR(50) NULL,
   `exercises_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,

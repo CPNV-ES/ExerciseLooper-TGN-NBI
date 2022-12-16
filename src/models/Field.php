@@ -19,7 +19,7 @@ class Field extends Model
     protected $field;
     protected $exerciseId;
 
-    public function __construct($id, $title,$field, $exerciseId)
+    public function __construct($id, $title, $field, $exerciseId)
     {
         $this->id = $id;
         $this->title = $title;
@@ -42,11 +42,13 @@ class Field extends Model
         $this->title = $title;
     }
 
-    public function getField() {
+    public function getField()
+    {
         return $this->field;
     }
 
-    public function setField($field) {
+    public function setField($field)
+    {
         $this->field = $field;
     }
 
@@ -54,8 +56,8 @@ class Field extends Model
     {
         $this->update(
             self::TABLE,
-            ['title','field', 'exercises_id'],
-            [$this->title,$this->field, $this->exerciseId],
+            ['title', 'field', 'exercises_id'],
+            [$this->title, $this->field, $this->exerciseId],
             $this->id
         );
     }
@@ -63,7 +65,7 @@ class Field extends Model
     public static function getAll($where = "")
     {
         $result = [];
-        $fields = self::select("fields", "*", $where);
+        $fields = self::select(self::TABLE, "*", $where);
         foreach ($fields as $field) {
             array_push(
                 $result,
@@ -80,7 +82,7 @@ class Field extends Model
 
     public static function getOne($id)
     {
-        $field = self::select("fields", "*", ["id" => $id])[0];
+        $field = self::select(self::TABLE, "*", ["id" => $id])[0];
         if ($field) {
             return new self(
                 $field['id'],
@@ -91,19 +93,19 @@ class Field extends Model
         }
     }
 
-    public static function create($title,$field, $exercise)
+    public static function create($title, $field, $exercise)
     {
         $exerciseId = null;
         $exerciseType = gettype($exercise);
-        if($exerciseType == "integer" || $exerciseType == "string") {
+        if ($exerciseType == "integer" || $exerciseType == "string") {
             $exerciseId = $exercise;
         } else {
             $exerciseId = $exercise->getID();
         }
 
-        if($exerciseId != null) {
+        if ($exerciseId != null) {
             $id = self::insert(self::TABLE, 'title,field,exercises_id', "$title,$field,$exerciseId");
-            return new self($id, $title,$field, $exerciseId);
+            return new self($id, $title, $field, $exerciseId);
         }
     }
 

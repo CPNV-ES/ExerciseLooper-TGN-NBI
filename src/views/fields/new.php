@@ -16,16 +16,18 @@
                             <td><?= $field->getTitle() ?></td>
                             <td><?= $field->getField() ?></td>
                             <td>
-                                <a title="Edit fields" href="/<?= $data['router']->getUrl('editField', ["id" => $data['exerciseId'], "field" => $field->getID()])?>"><i class="fa fa-edit"></i></a>
-                                <form action="/<?= $data['router']->getUrl('deleteField', ["id" => $data['exerciseId'], "field" => $field->getID()])?>" method="POST" class="form-hide">
-                                        <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
+                                <a title="Edit fields" href="/<?= $data['router']->getUrl('editField', ["id" => $data['exerciseId'], "field" => $field->getID()]) ?>"><i class="fa fa-edit"></i></a>
+                                <form action="/<?= $data['router']->getUrl('deleteField', ["id" => $data['exerciseId'], "field" => $field->getID()]) ?>" method="POST" class="form-hide">
+                                    <button type="submit" class="btn-hidden"><i class="fa fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <a data-confirm="Are you sure? You won't be able to further edit this exercise" class="button" rel="nofollow" data-method="put" href="/exercises/778?exercise%5Bstatus%5D=answering"><i class="fa fa-comment"></i> Complete and be ready for answers</a>
+            <form action="/<?= $data['router']->getUrl('updateState', ["id" => $data['exerciseId'], "state" => "Answering"]) ?>" method="POST" class="form-hide">
+                <button type="submit" class="button"><i class="fa fa-comment"></i> Complete and be ready for answers</button>
+            </form>
         </section>
         <section class="column">
             <h1>New Field</h1>
