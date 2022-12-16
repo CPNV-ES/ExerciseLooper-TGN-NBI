@@ -1,5 +1,14 @@
 <?php
+/*
+    Project: ExerciseLooper - Maw1.1
+    Author: Noah Barberini & Thomas Grossmann
+    Date: 12.09.2022
+    Description: Route of each actions of controllers
+    
+*/
+
 use Src\Router\Router;
+
 $router = Router::getInstance($_SERVER['REQUEST_URI']);
 
 /* ------------- Routes ------------- */
@@ -20,9 +29,9 @@ $router->post('/exercises/:id/fields/:field/edit', "field#editPost", "editFieldP
 
 $router->post('/exercises/:id/fields', "field#newPost", "newFieldPost");
 
-$router->get('/exercises/:id/fulfillments/new', "fulfillment#new","newFulfillment");
+$router->get('/exercises/:id/fulfillments/new', "fulfillment#new", "newFulfillment");
 
-$router->post('/exercises/:id/fulfillments/new', "fulfillment#newPost","newFulfillmentPost");
+$router->post('/exercises/:id/fulfillments/new', "fulfillment#newPost", "newFulfillmentPost");
 
 $router->get('/exercises/:id/fulfillments/:fulfillment/edit', "fulfillment#edit", "editFulfillment");
 

@@ -8,6 +8,8 @@
 
 namespace Src\Models;
 
+use Src\Models\Model;
+
 class Fulfillment extends Model
 {
     const TABLE = "fulfillments";
