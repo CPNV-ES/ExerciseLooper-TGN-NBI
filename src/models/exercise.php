@@ -10,7 +10,6 @@ namespace Src\Models;
 
 use Src\Models\Model;
 use Src\Models\Field;
-use Src\Models\Fulfillment;
 
 class Exercise extends Model
 {
