@@ -10,7 +10,6 @@ namespace Src\Models;
 
 use Src\Models\Model;
 use Src\Models\Field;
-use Src\Models\Fulfillment;
 
 class Exercise extends Model
 {
@@ -78,7 +77,7 @@ class Exercise extends Model
     public static function getAll($where = [])
     {
         $result = [];
-        $data = self::select("exercises", "*", $where);
+        $data = self::select(self::TABLE, "*", $where);
         foreach ($data as $exercise) {
             $fields = Field::getAll(["exercises_id" => $exercise['id']]);
             array_push(
@@ -96,7 +95,7 @@ class Exercise extends Model
 
     public static function getOne($id)
     {
-        $exercise = self::select("exercises", "*", ["id" => $id])[0];
+        $exercise = self::select(self::TABLE, "*", ["id" => $id])[0];
         if ($exercise) {
             $fields = Field::getAll(["exercises_id" => $id]);
             return new self(

@@ -20,13 +20,19 @@ class Database
     private $dbuser;
     private $dbpass;
 
+    /**
+     * Private constructor for the Database class, to implement the singleton pattern
+     */
     private function __construct()
     {
         $configFile = parse_ini_file(SOURCE_DIR . '/config/config.ini');
+
+        // Save the configuration values
         $this->dbhost = $configFile['dbhost'];
         $this->dbname = $configFile['dbname'];
         $this->dbuser = $configFile['user'];
         $this->dbpass = $configFile['pass'];
+
         try {
             $this->connection = new PDO('mysql:host=' . $this->dbhost . ';dbname=' . $this->dbname, $this->dbuser, $this->dbpass);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -35,6 +41,11 @@ class Database
         }
     }
 
+    /**
+     * Get the singleton instance of the Database class
+     *
+     * @return Database Singleton instance of the Database class
+     */
     public static function getInstance()
     {
         if (!self::$instance) {
@@ -43,6 +54,11 @@ class Database
         return self::$instance;
     }
 
+    /**
+     * Get the PDO connection object
+     *
+     * @return PDO PDO connection object
+     */
     public function getConnection()
     {
         return $this->connection;

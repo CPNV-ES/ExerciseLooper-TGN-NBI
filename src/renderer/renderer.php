@@ -10,6 +10,13 @@ namespace Src\Renderer;
 
 class Renderer
 {
+    /**
+     * Render a view with the specified template and content
+     *
+     * @param string $template Name of the template file to use, or null to skip using a template
+     * @param string $content Name of the view file to render
+     * @param array $data Array of data to pass to the view
+     */
     public static function render($template, $content, $data = [])
     {
         if ($template) {
