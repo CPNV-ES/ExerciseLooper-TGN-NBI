@@ -19,10 +19,10 @@
 
 ### Procédure
 1. Récuperer le repository depuis Github (clone, fork ou téléchargement .zip) (https://github.com/CPNV-ES/ExerciseLooper-TGN-NBI)
-1. Faire un ``` composer install ``` à la racine du projet
-1. Ouvrir le fichier ``` config.exemple.ini ``` et remplir les " " avec vos informations.
-   1. Renommer le fichier en ``` config.ini ```
-1. Lancer le serveur PHP via la commande ``` php -S 127.0.0.1:8080 -t public ```
+1. Faire un `composer install` à la racine du projet
+1. Ouvrir le fichier `config.exemple.ini` et remplir les " " avec vos informations.
+   1. Renommer le fichier en `config.ini`
+1. Lancer le serveur PHP via la commande `php -S 127.0.0.1:8080 -t public`
 
 ## Structure du projet
 - **documentation/**
@@ -45,7 +45,7 @@ Ce dossier contient l'index du projet et les ressources Images/CSS/JS s'il y en 
     - Ce dossier contient toutes les vues du site découpées par objets (vues exercise, vues fields etc...) ainsi que les erreurs et templates.
   - **routes.php**
     - Ce fichier contient toutes les routes de l'application, celles-ci font appel à une méthode contenue dans un controller.
-- **vendor** (dossier généré avec ``` composer install ```)
+- **vendor** (dossier généré avec `composer install`)
 
 ## Fonctionnement du projet
 
@@ -66,14 +66,14 @@ Cet héritage vous permet d'utiliser les méthodes "select, update, insert et de
 
 ##### Paramètres de la méthode "select"
 - **_table_** : Nom de la table où chercher les données
-- **_fields_** : Colonnes de la table que l'on veut récupérer (par ex. "```*```")
-- **_where_** (optionnel) : Condition optionnelle de la requête (par ex. "```id = 1```")
+- **_fields_** : Colonnes de la table que l'on veut récupérer (par ex. "`*`")
+- **_where_** (optionnel) : Condition optionnelle de la requête (par ex. "`id = 1`")
 
 ##### Paramètres de la méthode "update"
 - **_table_** : Nom de la table où se trouvent les données que l'on veut modifier
 - **_fields_** : Colonnes de la table que l'on veut modifier
 - **_values_** : Nouvelles valeurs qui remplacent les anciennes
-- **_where_** : Condition de la requête (par ex. "```id = 1```")
+- **_where_** : Condition de la requête (par ex. "`id = 1`")
 
 ##### Paramètres de la méthode "insert"
 - **_table_** : Nom de la table où l'on veut insérer des données
@@ -82,12 +82,12 @@ Cet héritage vous permet d'utiliser les méthodes "select, update, insert et de
 
 ##### Paramètres de la méthode "delete"
 - **_table_** : Nom de la table où l'on veut supprimer des données
-- **_where_** : Condition de la requête (par ex. "```id = 1```")
+- **_where_** : Condition de la requête (par ex. "`id = 1`")
 
 ### Contrôleurs
 Pour créer un nouveau model, il faut ajouter un ficher dans le dossier controllers et de créer une classe qui hérite de "Controller".
 
-```php 
+```php
 class MyController extends Controller
 ```
 
@@ -95,31 +95,31 @@ Cet héritage vous permet d'utiliser les méthodes "render et redirect".
 La méthode render permet de rendre une vue qui se trouve dans le dossier views.
 
 ##### Paramètres de la méthode "render"
-- **_template_** : Nom du fichier du template (se trouvant sous ```src/views/templates```)
+- **_template_** : Nom du fichier du template (se trouvant sous `src/views/templates`)
 - **_content_** : Nom du fichier de la vue voulue
 - **_data_** : Contenu que l'on veut passer à la vue
 
 ##### Paramètres de la méthode "redirect"
-- **_route_** : Nom de la route requis pour accéder aux bonnes ressources (par ex. ```'edit'```)
-- **_params_** : Paramètres passés à la route requis pour afficher les bonnes données (par ex. ```['id' => $id]``` afin d'afficher un détail)
+- **_route_** : Nom de la route requis pour accéder aux bonnes ressources (par ex. `'edit'`)
+- **_params_** : Paramètres passés à la route requis pour afficher les bonnes données (par ex. `['id' => $id]` afin d'afficher un détail)
 
 ### Vues
-Toutes les vues du site se trouvent sous ```src/views``` et sont séparées par dossier (les vues exercises sont séparées des vues fulfillments, etc...).
-Elles sont toutes basées sur un template ```template.php``` se trouvant son dossier ```templates/```.
+Toutes les vues du site se trouvent sous `src/views` et sont séparées par dossier (les vues exercises sont séparées des vues fulfillments, etc...).
+Elles sont toutes basées sur un template `template.php` se trouvant son dossier `templates/`.
 
 Pour ajouter une nouvelle vue :
-- Créer un nouveau fichier ```.php``` dans le dossier correspondant
+- Créer un nouveau fichier `.php` dans le dossier correspondant
 - Écrire l'HTML de la vue dans ce fichier
-  - Il faut seulement que le contenu de la vue se trouve entre des balises ```<main class="container"></main>```, pas besoin de réecrire l'HTML en entier.
+  - Il faut seulement que le contenu de la vue se trouve entre des balises `<main class="container"></main>`, pas besoin de réecrire l'HTML en entier.
 
 ### Routes
-Les routes sont toutes définies dans un seul fichier ```routes.php``` se trouvant dans ```src/```.
+Les routes sont toutes définies dans un seul fichier `routes.php` se trouvant dans `src/`.
 
-Exemple d'une route : ```$router->post('/exercises/:id/delete', "exercise#delete", "deleteExercise");```
+Exemple d'une route : `$router->post('/exercises/:id/delete', "exercise#delete", "deleteExercise");`
 
 Qui est donc construite avec :
 - La méthode HTTP (GET ou POST), en pointant sur une méthode du router (get() ou post())
 - Le "chemin" de la route entre, ce qui sera affiché dans l'URL
-  - S'il y a des IDs à passer dans la route, utiliser ```:id```
-- Le nom du contrôleur et le nom de la méthode séparés par un ```#```
+  - S'il y a des IDs à passer dans la route, utiliser `:id`
+- Le nom du contrôleur et le nom de la méthode séparés par un `#`
 - Le nom de la route en elle-même (optionnel)
