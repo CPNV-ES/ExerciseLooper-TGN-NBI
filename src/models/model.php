@@ -98,7 +98,7 @@ class Model
         $statement = self::$connection->prepare($query);
 
         foreach (array_combine($bindedFields, explode(',', $values)) as $field => $value) {
-            $statement->bindValue($field, $value);
+            $statement->bindValue($field, htmlspecialchars($value, ENT_QUOTES, 'UTF-8'));
         }
 
         $statement->execute();
@@ -130,7 +130,7 @@ class Model
             $query = "UPDATE $table SET $strValues WHERE id = :id";
             $statement = self::$connection->prepare($query);
             for ($i = 0; $i < count($values); $i++) {
-                $statement->bindValue(":" . $fields[$i], $values[$i]);
+                $statement->bindValue(":" . $fields[$i], htmlspecialchars($values[$i], ENT_QUOTES, 'UTF-8'));
             }
             $statement->bindValue(":id", $where);
             $statement->execute();
@@ -140,17 +140,18 @@ class Model
             $statement = self::$connection->prepare($query);
 
             foreach ($fields as $key => $field) {
-                $statement->bindValue(":$field", $values[$key]);
+                $statement->bindValue(":$field", htmlspecialchars($values[$key], ENT_QUOTES, 'UTF-8'));
             }
 
             // Bind the values in the WHERE clause to the corresponding fields
             foreach (array_keys((array) $where) as $key) {
-                $statement->bindValue(":$key", $where[$key]);
+                $statement->bindValue(":$key", htmlspecialchars($where[$key], ENT_QUOTES, 'UTF-8'));
             }
             // Execute the statement
             $statement->execute();
         }
     }
+
 
 
     /**
